@@ -1,8 +1,8 @@
 {
-  "name": "Lab 08 - Single Resource Api ",
+  "name": "lab-08-single-resource-api ",
   "version": "1.0.0",
-  "description": "lab-08-single-resource-api",
-  "main": "index.js",
+  "description": "Lab 08 - Single Resource API",
+  "main": "server.js",
   "scripts": {
     "test": "mocha"
   },
@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/jessicamvs/lab-08-single-resource-api/issues"
   },
-  "homepage": "https://github.com/jessicamvs/lab-08-single-resource-api#readme"
+  "homepage": "https://github.com/jessicamvs/lab-08-single-resource-api#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.2.0"
+  }
 }
