@@ -1,0 +1,22 @@
+{
+  "name": "lab-08-single-resource-api",
+  "version": "1.0.0",
+  "description": "pulling a resource from api",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "author": "Michael Bishop",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.2.0"
+  }
+}
