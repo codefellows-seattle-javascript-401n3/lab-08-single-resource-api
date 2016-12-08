@@ -1,0 +1,19 @@
+{
+  "name": "Lab 08 - Single Resource Api ",
+  "version": "1.0.0",
+  "description": "lab-08-single-resource-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessicamvs/lab-08-single-resource-api.git"
+  },
+  "author": "Jessica Vasquez-Soltero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jessicamvs/lab-08-single-resource-api/issues"
+  },
+  "homepage": "https://github.com/jessicamvs/lab-08-single-resource-api#readme"
+}
