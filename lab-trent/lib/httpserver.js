@@ -2,10 +2,10 @@
 
 const http = require('http');
 const EE = require('events');
-const get = new EE();
-const put = new EE();
-const del = new EE();
-const post = new EE();
+const getEmitter = new EE();
+const putEmitter = new EE();
+const delEmitter = new EE();
+const postEmitter = new EE();
 
 const requestParser = require('./requestparser');
 
@@ -17,16 +17,16 @@ function createServer(port, callback) {
     requestParser.parseBody(req, function(body) {
       switch(req.method) {
       case 'GET':
-        get.emit(req.url.pathname, req, res);
+        getEmitter.emit(req.url.pathname, req, res);
         break;
       case 'PUT':
-        put.emit(req.url.pathname, req, res);
+        putEmitter.emit(req.url.pathname, req, res);
         break;
       case 'DELETE':
-        del.emit(req.url.pathname, req, res);
+        delEmitter.emit(req.url.pathname, req, res);
         break;
       case 'POST':
-        post.emit(req.url.pathname, req, res);
+        postEmitter.emit(req.url.pathname, req, res);
         break;
       }
       req.body = body;
@@ -35,6 +35,29 @@ function createServer(port, callback) {
   server.listen(port, callback);
 }
 
+function get(path, callback) {
+  getEmitter.on(path, callback);
+}
+
+function put(path, callback) {
+  putEmitter.on(path, callback);
+}
+
+function del(path, callback) {
+  delEmitter.on(path, callback);
+}
+
+function post(path, callback) {
+  postEmitter.on(path, callback);
+}
+
+function on(path, callback) {
+  getEmitter.on(path, callback);
+  postEmitter.on(path, callback);
+  delEmitter.on(path, callback);
+  putEmitter.on(path, callback);
+}
+
 module.exports = {
-  get, put, del, post, createServer,
+  get, put, del, post, on, createServer,
 };
