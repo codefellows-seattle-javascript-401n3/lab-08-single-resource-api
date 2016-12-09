@@ -10,9 +10,8 @@ httpServer.createServer(PORT, function() {
   console.log('Server listening on port: ' + PORT);
 });
 
-httpServer.on('/', function(err, req, res) {
-  if (err) console.error(err);
-  res.out('Please use the api route.');
+httpServer.on('/', function(req, res) {
+  res.out('Please use the /api/ route.');
   res.end();
 });
 

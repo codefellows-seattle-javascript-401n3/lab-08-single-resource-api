@@ -51,6 +51,11 @@ function createServer(port, callback) {
   server.listen(port, callback);
 }
 
+function closeServer() {
+  if (this.server)
+    this.server.close();
+}
+
 function get(path, callback) {
   getEmitter.on(path, callback);
 }
@@ -76,6 +81,7 @@ function on(path, callback) {
 
 module.exports = {
   createServer: createServer,
+  closeServer: closeServer,
   get: get,
   put: put,
   del: del,
