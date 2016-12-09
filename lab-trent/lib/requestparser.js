@@ -3,20 +3,22 @@
 const url = require('url');
 const queryString = require('querystring');
 
-exports.parseBody = function(req, callback) {
-  let body = '';
+exports.parseBody = function(req) {
+  return new Promise(function(res, rej) {
+    let body = '';
 
-  req.on('data', function(data) {
-    body += data.toString();
-  });
+    req.on('data', function(data) {
+      body += data.toString();
+    });
 
-  req.on('end', function() {
-    if (body) {
-      body = JSON.parse(body);
-    } else {
-      body = {};
-    }
-    callback(body);
+    req.on('end', function() {
+      if (body) {
+        body = JSON.parse(body);
+      } else {
+        body = {};
+      }
+      res(body);
+    });
   });
 };
 

@@ -13,3 +13,5 @@ exports.deleteResource = function(resource) {
 exports.getResource = function(id) {
   return resources[id];
 };
+
+exports.resources = resources;
