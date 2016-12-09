@@ -5,20 +5,25 @@ const queryString = require('querystring');
 
 exports.parseBody = function(req) {
   return new Promise(function(res, rej) {
-    let body = '';
+    try {
+      let body = '';
 
-    req.on('data', function(data) {
-      body += data.toString();
-    });
+      req.on('data', function(data) {
+        body += data.toString();
+      });
 
-    req.on('end', function() {
-      if (body) {
-        body = JSON.parse(body);
-      } else {
-        body = {};
-      }
-      res(body);
-    });
+      req.on('end', function() {
+        if (body) {
+          body = JSON.parse(body);
+        } else {
+          body = {};
+        }
+        req.body = body;
+        res(null);
+      });
+    } catch(err) {
+      rej(err);
+    }
   });
 };
 

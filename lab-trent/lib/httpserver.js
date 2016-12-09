@@ -28,7 +28,8 @@ http.ServerResponse.prototype.out = function(data, returnCode) {
 function createServer(port, callback) {
   server = http.createServer(function(req, res) {
     requestParser.parseUrlData(req);
-    requestParser.parseBody(req).then(function(body) {
+    requestParser.parseBody(req).then(function(err) {
+      if (err) console.error(err);
       switch(req.method) {
       case 'GET':
         getEmitter.emit(req.url.pathname, req, res);
@@ -43,7 +44,8 @@ function createServer(port, callback) {
         postEmitter.emit(req.url.pathname, req, res);
         break;
       }
-      req.body = body;
+    }).catch(function(err) {
+      console.error(err);
     });
   });
   server.listen(port, callback);

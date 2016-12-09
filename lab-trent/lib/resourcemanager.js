@@ -14,4 +14,6 @@ exports.getResource = function(id) {
   return resources[id];
 };
 
-exports.resources = resources;
+exports.getKeys = function() {
+  return Object.keys(resources);
+};
