@@ -11,7 +11,7 @@ const requestParser = require('./requestparser');
 
 let server = null;
 
-http.ServerResponse.out = function(data, returnCode) {
+http.ServerResponse.prototype.out = function(data, returnCode) {
   if (typeof data === 'object') {
     this.setHeader('Content-Type', 'application/json');
     this.write(JSON.stringify(data));

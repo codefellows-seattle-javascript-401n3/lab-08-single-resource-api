@@ -9,6 +9,6 @@ httpServer.createServer(PORT, function() {
 });
 
 httpServer.on('/', function(req, res) {
-  res.out('Testing out method.');
+  res.out({ text: 'Testing out method' });
   res.end();
 });
