@@ -11,6 +11,20 @@ const requestParser = require('./requestparser');
 
 let server = null;
 
+http.ServerResponse.out = function(data, returnCode) {
+  if (typeof data === 'object') {
+    this.setHeader('Content-Type', 'application/json');
+    this.write(JSON.stringify(data));
+  } else if (typeof data === 'string') {
+    this.setHeader('Content-Type', 'text/plain');
+    this.write(data);
+  }
+  if (returnCode)
+    this.returnCode = returnCode;
+  else
+    this.returnCode = 200;
+};
+
 function createServer(port, callback) {
   server = http.createServer(function(req, res) {
     requestParser.parseUrlData(req);
@@ -59,5 +73,10 @@ function on(path, callback) {
 }
 
 module.exports = {
-  get, put, del, post, on, createServer,
+  createServer: createServer,
+  get: get,
+  put: put,
+  del: del,
+  post: post,
+  on: on,
 };

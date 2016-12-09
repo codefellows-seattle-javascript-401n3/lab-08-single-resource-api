@@ -8,9 +8,7 @@ httpServer.createServer(PORT, function() {
   console.log('Server listening on port: ' + PORT);
 });
 
-httpServer.get('/', function(req, res) {
-  res.status = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.write('Testing ' + req.method);
+httpServer.on('/', function(req, res) {
+  res.out('Testing out method.');
   res.end();
 });
