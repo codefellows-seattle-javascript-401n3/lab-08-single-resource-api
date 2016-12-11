@@ -31,7 +31,7 @@ exports.fetchItem = function(schemaName, id){
 exports.deleteItem = function(schemaName, id){
   return new Promise((resolve, reject) =>{
     if(!schemaName) return reject(new Error('schema not found'));
-    if(! id) return reject(new Error('id not found'));
+    if(!id) return reject(new Error('id not found'));
 
     var schema = storage[schemaName];
     if(!schema) return reject(new Error('schema not found'));

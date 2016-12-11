@@ -4,7 +4,7 @@ const eslint = require('gulp-eslint');
 
 
 gulp.task('mocha', function() {
-  return gulp.src('test/test.js')
+  return gulp.src('test/route-test.js')
     .pipe(mocha());
 });
 

@@ -19,9 +19,12 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
-    "gulp-mocha": "^3.0.1"
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.2.0",
+    "superagent": "^3.2.1"
   },
   "dependencies": {
+    "chai": "^3.5.0",
     "node-uuid": "^1.4.7"
   }
 }
