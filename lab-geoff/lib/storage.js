@@ -21,3 +21,20 @@ exports.createItem = function(schemaName, item) {
       return Promise.reject(err);
     });
 };
+
+exports.fetchItem = function(schemaName, id) {
+  if(!schemaName) {
+    return Promise.reject(new Error('need schemaName'));
+  }
+  if(!id) {
+    return Promise.reject(new Error('need id'));
+  }
+  return fs.readFileProm('path to file')
+    .then(data => {
+      let item = JSON.parse(data.toString());
+      return item;
+    })
+    .catch(err => {
+      return Promise.reject(err);
+    });
+};

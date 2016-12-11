@@ -1,8 +1,8 @@
 'use strict';
 
-let storage = require('./model/storage.js');
-let response = require('./lib/response.js'); //does not exist yet
-let Book = require('./model/book.js');
+let storage = require('./../lib/storage.js');
+let response = require('../lib/response.js'); //does not exist yet
+let Book = require('../model/book.js');
 
 module.exports = function(router) {
   router.get('api/books', function(req, res) {
