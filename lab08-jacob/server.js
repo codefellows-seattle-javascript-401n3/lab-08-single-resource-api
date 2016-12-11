@@ -1,7 +1,5 @@
 const http = require('http');
-const Router = require('./lib/router');
-
-// var resources = [];
+const Router = require('./lib/router.js');
 
 const PORT = process.env.PORT || 3000;
 const router = new Router();

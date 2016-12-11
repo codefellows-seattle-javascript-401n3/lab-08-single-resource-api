@@ -3,9 +3,11 @@ const response = require('../lib/response.js');
 const User = require('../model/resource.js');
 
 module.exports = function(router) {
-  router.get('/api/user', function(req, res) {
+  router.get('/api/users', function(req, res) {
+    console.log('got to the get');
     if (req.url.query.id) {
-      storage.fetchItem('user', req.url.id)
+      console.log('finally made it!');
+      storage.fetchItem('users', req.url.query.id)
       .then(user => {
         response.sendJSON(res, 200, user);
       })
@@ -18,10 +20,11 @@ module.exports = function(router) {
     response.sendText(res, 400, 'bad request');
   });
 
-  router.post('/api/user', function(req, res) {
+  router.post('/api/users', function(req, res) {
+    console.log(req.body.username);
     try {
-      var user = new User(req.body.name);
-      storage.createItem('user', user);
+      var user = new User(req.body.username);
+      storage.createItem('users', user);
       res.writeHead(200, {
         'Content-Type': 'application/json',
       });

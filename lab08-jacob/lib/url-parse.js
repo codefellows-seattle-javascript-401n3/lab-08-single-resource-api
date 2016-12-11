@@ -1,18 +1,14 @@
+'use strict';
 
-const url = require('url');
-const queryString = require('querystring');
+const parseUrl = require('url').parse;
+const parseQuery = require('querystring').parse;
 
-module.exports = function parseUrl(req) {
-  return new Promise((resolve, reject) => {
-    if (req.method === 'GET') {
-      req.path = url.parse(req.url).pathname;
-      req.str = req.url.split('?')[1];
-      req.query = queryString.parse(req.str);
-      resolve(req);
-    }
-    req.on('error', err => {
-      console.error(err);
-      reject(err);
-    });
-  });
+module.exports = function(req) {
+  console.log('parsing url...');
+  req.url = parseUrl(req.url);
+  req.url.query = parseQuery(req.url.query);
+  console.log('query')
+  console.log(typeof req.url)
+  console.log(req.url.query)
+  return Promise.resolve(req);
 };

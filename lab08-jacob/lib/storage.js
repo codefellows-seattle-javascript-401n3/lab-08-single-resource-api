@@ -1,6 +1,9 @@
+const storage = {};
 const Promise = require('bluebird');
 let fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 //don't forget to install bluebird
+
+
 
 exports.createItem = function(schemaName, item) {
   if (!schemaName) return Promise.reject(new Error('expected schema name'));
@@ -19,6 +22,7 @@ exports.fetchItem = function(schemaName, id) {
   .then(data => {
     try {
       let item = JSON.parse(data.toString());
+      console.log(item);
       return item;
     } catch (err) {
       return Promise.reject(err);
