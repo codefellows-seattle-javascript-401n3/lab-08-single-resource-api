@@ -1,18 +1,32 @@
 'use strict';
 
-module.exports = function(req, callback) {
-  req.body = '';
+module.exports = function(req){
+  return new Promise((resolve, reject) => {
+    if (req.method === 'POST' || req.method === 'PUT'){
+      console.log('parsing body');
+      var body = '';
+      req.on('data', data => {
+        body += data.toString();
+      });
 
-  req.on('data', function(data){
-    req.body += data.toString();
-  });
+      req.on('end', () => {
+        try {
+          req.body = JSON.parse(body);
+          resolve(req);
+        } catch (err) {
+          console.error(err);
+          reject(err);
+        }
+      });
 
-  req.on('end', function(){
-    try {
-      req.body = JSON.parse(req.body);
-      callback(null, req.body);
-    } catch(err) {
-      callback(err);
+      req.on('error', err => {
+        console.error(err);
+        reject(err);
+      });
+
+      return;
     }
+    // resolve if anything but post or put
+    resolve();
   });
 };
