@@ -1,1 +1,3 @@
-const http = require('http');
+'use strict'
+
+const http = require('http')

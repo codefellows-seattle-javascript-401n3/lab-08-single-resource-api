@@ -1,4 +1,6 @@
-'use strict';
+'use strict'
+
+const responseHandler = require('./responseHandler')
 
 module.exports = (router, storage) => {
 
@@ -6,54 +8,38 @@ module.exports = (router, storage) => {
   // one callback per verb/route combo
   router.get('./dogs', function(req, res) {
     storage.fetchItem(item) // does this return JSON?
-      .then(dogs => {
-        res.writeHeader(200, {'Content-Type': 'text/plain'}); // won't this be JSON?
-        res.write(dogs);
-        res.end();
+      .then(data => {
+        responseHandler(null, 'JSON', data)
       })
       .catch(err => {
-        res.writeHeader(400, {'Content-Type': 'text/plain'});
-        res.write(err);
-        res.end();
-      });
-  });
+        responseHandler(err)
+      })
+  })
   router.post('./dogs', function(req, res) {
     storage.postItem(item)
-      .then(() => {
-        res.writeHeader(200, {'Content-Type': 'text/plain'});
-        res.write('success!');
-        res.end();
+      .then(data => {
+        responseHandler(null, 'JSON', data)
       })
       .catch(err => {
-        res.writeHeader(400, {'Content-Type': 'text/plain'});
-        res.write(err);
-        res.end();
-      });
-  });
+        responseHandler(err)
+      })
+  })
   router.put('./dogs', function(req, res) {
     storage.putItem(item)
-      .then(() => {
-        res.writeHeader(200, {'Content-Type': 'text/plain'});
-        res.write('success!');
-        res.end();
+      .then(data => {
+        responseHandler(null, 'JSON', data)
       })
       .catch(err => {
-        res.writeHeader(400, {'Content-Type': 'text/plain'});
-        res.write(err);
-        res.end();
-      });
-  });
+        responseHandler(err)
+      })
+  })
   router.delete('./dogs', function(req, res) {
     storage.deleteItem(item)
-      .then(() => {
-        res.writeHeader(200, {'Content-Type': 'text/plain'});
-        res.write('success!');
-        res.end();
+      .then(data => {
+        responseHandler(null, 'JSON', data)
       })
       .catch(err => {
-        res.writeHeader(400, {'Content-Type': 'text/plain'});
-        res.write(err);
-        res.end();
-      });
-  });
-};
+        responseHandler(err)
+      })
+  })
+}

@@ -1,15 +1,15 @@
-'use strict';
+'use strict'
 
-const http = require('http'); // am I integrating my server.js into my index.js file this time?
+const http = require('http') // am I integrating my server.js into my index.js file this time?
 
-const Router = require('./lib/router');
+const Router = require('./lib/router')
 const storage = require('./lib/storage')
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 
 // this is called dependency injection
-let router = new Router();
-require('./routes/dog-routes')(router, storage);
+let router = new Router()
+require('./routes/dog-routes')(router, storage)
 
 
 

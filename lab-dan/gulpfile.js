@@ -1,12 +1,12 @@
-'use strict';
+'use strict'
 
-const gulp = require('gulp');
-const eslint = require('gulp-eslint');
-const mocha = require('gulp-mocha');
-const plumber = require('gulp-plumber');
+const gulp = require('gulp')
+const eslint = require('gulp-eslint')
+const mocha = require('gulp-mocha')
+const plumber = require('gulp-plumber')
 
-const LIB_PATH = './lib/**/*.js';
-const TEST_PATH = './test/**/*.js';
+const LIB_PATH = './lib/**/*.js'
+const TEST_PATH = './test/**/*.js'
 
 // copy-pasted the code from https://github.com/adametry/gulp-eslint for the comments
 // then slightly modified
@@ -23,19 +23,19 @@ gulp.task('lint', () => {
     .pipe(eslint())
     // eslint.format() outputs the lint results to the console.
     // Alternatively use eslint.formatEach() (see Docs).
-    .pipe(eslint.format());
-});
+    .pipe(eslint.format())
+})
 
 gulp.task('mocha', function () {
   return gulp.src([TEST_PATH], {read:false})
     // plumber to better handle errors
     .pipe(plumber())
-    .pipe(mocha());
-});
+    .pipe(mocha())
+})
 
 gulp.task('dev', function () {
-  gulp.watch([LIB_PATH, TEST_PATH], ['lint', 'mocha']);
-});
+  gulp.watch([LIB_PATH, TEST_PATH], ['lint', 'mocha'])
+})
 
 // run through lint and mocha the first time, and then start watching the files
-gulp.task('default', ['lint','mocha','dev']);
+gulp.task('default', ['lint','mocha','dev'])
