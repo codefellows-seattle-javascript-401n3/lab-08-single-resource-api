@@ -18,7 +18,7 @@ const Router = module.exports = function(){
 
 Router.prototype.route = function() {
   return (req, res) => {
-    Promise.all( [parsedUrl(req), parsedBody(req)] ) 
+    Promise.all( [parsedUrl(req), parsedBody(req)] )
       .then( () => {
         if (typeof this.routes[req.method][req.url.pathname] === 'function') {
           this.routes[req.method][req.url.pathname](req, res);
