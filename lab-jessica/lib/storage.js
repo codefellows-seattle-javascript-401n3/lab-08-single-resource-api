@@ -47,6 +47,11 @@ exports.deleteItem = function(schemaName, id) {
     .then(paths => {
       console.log('Deleted files and folders:\n', paths.join('\n'));
     })
-    .catch(err => Promise.reject(err));
+    // .catch(err => Promise.reject(err));
+    .catch(err => {
+      console.error(err);
+    });
+    return;
   }
+  return Promise.reject(new Error('file path does not exist'));
 };

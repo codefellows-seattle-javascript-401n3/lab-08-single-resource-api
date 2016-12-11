@@ -31,8 +31,6 @@ module.exports = function(router){
     }
   });
 
-  // * `DELETE` request
-  //  * pass an `?id=<uuid>` in the query string to delete a specific resource
   //  * should return 204 status with no content in the body
 
   router.delete('/api/books', function(req, res) {
