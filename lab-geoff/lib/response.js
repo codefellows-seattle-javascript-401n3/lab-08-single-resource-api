@@ -1,7 +1,12 @@
 'use strict';
 
-exports.sendJSON = function(req) {
+exports.sendJSON = function(res, status, data) {
   console.log('send json function');
+  res.writeHead(status, {
+    'Content-type': 'application/json',
+  });
+  res.write(JSON.stringify(data));
+  res.end();
 };
 
 exports.sendText = function(res, status, string) {
