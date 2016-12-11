@@ -34,9 +34,7 @@ Router.prototype.route = function() {
       parsePost(req), //this will run if it is a post request
     ])
     .then(() => {
-      console.log('moving on');
       if(this.routes[req.method][req.url.pathname]){ //if the property exists on the routes object that is a function...
-        console.log('it exists!');
         this.routes[req.method][req.url.pathname](req, res); //then run the function
         return;
       }

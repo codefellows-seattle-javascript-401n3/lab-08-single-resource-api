@@ -4,9 +4,7 @@ const User = require('../model/resource.js');
 
 module.exports = function(router) {
   router.get('/api/users', function(req, res) {
-    console.log('got to the get');
     if (req.url.query.id) {
-      console.log('finally made it!');
       storage.fetchItem('users', req.url.query.id)
       .then(user => {
         response.sendJSON(res, 200, user);
@@ -21,7 +19,6 @@ module.exports = function(router) {
   });
 
   router.post('/api/users', function(req, res) {
-    console.log(req.body.username);
     try {
       var user = new User(req.body.username);
       storage.createItem('users', user);
@@ -36,6 +33,24 @@ module.exports = function(router) {
         'Content-Type': 'text/plain',
       });
       res.write('you can\'t post that smut!');
+      res.end();
+    }
+  });
+
+  router.delete('/api/users', function(req, res) {
+    try {
+      var user = (req.url.query.id);
+      storage.deleteUser('users', user);
+      res.writeHead(204, {
+        'Content-Type': 'text/plain',
+      });
+      res.end(); //normally I would log 'user deleted' or something.
+    } catch (err) {
+      console.error(err);
+      res.writeHead(400, {
+        'Content-Type': 'text/plain',
+      });
+      res.write('delete failed');
       res.end();
     }
   });
