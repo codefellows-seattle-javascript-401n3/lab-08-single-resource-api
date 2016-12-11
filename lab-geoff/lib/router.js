@@ -14,5 +14,14 @@ function Router() {
 }
 
 Router.prototype.get = function(ENDPOINT, callback) {
-  this.routes.GET[ENPOINT] = callback;
+  this.routes.GET[ENDPOINT] = callback;
+};
+Router.prototype.post = function(ENDPOINT, callback) {
+  this.routes.POST[ENDPOINT] = callback;
+};
+Router.prototype.put = function(ENDPOINT, callback) {
+  this.routes.PUT[ENDPOINT] = callback;
+};
+Router.prototype.delete = function(ENDPOINT, callback) {
+  this.routes.DELETE[ENDPOINT] = callback;
 };
