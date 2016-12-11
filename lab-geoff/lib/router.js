@@ -2,6 +2,8 @@
 // create a route for CREATE, READ and DELETE operations
 'use strict';
 
+module.exports = Router;
+
 function Router() {
   this.routes = {
     GET: {},
