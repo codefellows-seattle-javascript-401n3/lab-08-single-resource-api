@@ -25,6 +25,7 @@ function Router () {
 //   this.routes.DELETE[endpoint] = callback;
 // };
 
+  
 // OR
 
 ['get', 'post', 'put', 'delete'].forEach(verb => {
@@ -32,3 +33,11 @@ function Router () {
     this.routes[verb.toUpperCase()][endpoint] = callback;
   };
 });
+
+Router.prototype.route = function () {
+  return function(req, res) {
+    // ????
+  };
+};
+
+module.exports = Router;
