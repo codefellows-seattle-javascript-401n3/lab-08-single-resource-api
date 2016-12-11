@@ -2,7 +2,7 @@ const http = require('http');
 const parsePost = require('./lib/body-parser');
 const parseUrl= require('./lib/url-parse');
 const User = require('./model/resource');
-
+const router = require('./routes/router');
 
 var resources = [];
 
@@ -11,18 +11,23 @@ const PORT = process.env.PORT || 3000;
 const server = http.createServer();
 
 server.on('request', function (req, res) {
-  if (req.method === 'POST') {
+  console.log('incoming request')
+  if (req.method === 'POST' || req.method === 'PUT') {
     parsePost(req, function() {
       resources.push(new User(req.body));
-      console.log(resources);
       res.write(JSON.stringify(resources));
       res.end();
     });
   }
   else if (req.method === 'GET') {
-    parseUrl(req);
-    console.log(req.path);
+    parseUrl(req); //now I have req.path and req.query
     console.log(req.query);
+    var userArr = resources.map(function(user) {
+      var idObj = {}; 
+      idObj.id = user.id;
+      console.log(idObj, 'stringcheese');
+      // return idObj;
+    });
     res.end();
   }
 });
