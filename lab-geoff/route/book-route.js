@@ -1,11 +1,11 @@
 'use strict';
 
 let storage = require('./../lib/storage.js');
-let response = require('../lib/response.js'); //does not exist yet
+let response = require('./../lib/response.js');
 let Book = require('../model/book.js');
 
 module.exports = function(router) {
-  router.get('api/books', function(req, res) {
+  router.get('/books', function(req, res) {
     if(req.url.query.id) {
       storage.fetchItem('books', req.url.query.id)
         .then(book => {
@@ -17,9 +17,10 @@ module.exports = function(router) {
         });
       return;
     }
+    console.log(response.sendText);
     response.sendText(res, 400, 'bad request');
   });
-  router.post('api/books', function(req, res) {
+  router.post('/books', function(req, res) {
     try {
       let book = new Book(req.body.name, req.body.content); //req.body.name -> something like this
       storage.createItem('book', book);
