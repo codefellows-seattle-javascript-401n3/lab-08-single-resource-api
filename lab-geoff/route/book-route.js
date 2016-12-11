@@ -21,7 +21,7 @@ module.exports = function(router) {
   });
   router.post('api/books', function(req, res) {
     try {
-      let book = new Book(); //req.body.name -> something like this
+      let book = new Book(req.body.name, req.body.content); //req.body.name -> something like this
       storage.createItem('book', book);
       res.writeHead(200, {
         'Content-type' : 'application/json',
