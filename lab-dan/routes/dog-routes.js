@@ -1,45 +1,59 @@
 'use strict'
 
-const responseHandler = require('./responseHandler')
+const responseHandler = require('../lib/responseHandler')
 
 module.exports = (router, storage) => {
 
   // router expects 3 different things: verb, route, and callback
   // one callback per verb/route combo
-  router.get('./dogs', function(req, res) {
-    storage.fetchItem(item) // does this return JSON?
+  router.get('/', function(request, response) {
+    responseHandler.sendText(response, 200, 'Hello, world! This is the amazing dog api\n')
+  })
+
+  router.get('/dogs/all', function(request, response) {
+    storage.fetchAll()
       .then(data => {
-        responseHandler(null, 'JSON', data)
+        responseHandler.sendJSON(response, data.code, data.data)
       })
       .catch(err => {
-        responseHandler(err)
+        responseHandler.sendText(response, 400, err)
       })
   })
-  router.post('./dogs', function(req, res) {
-    storage.postItem(item)
+
+  router.get('/dogs', function(request, response) {
+    storage.fetchItem(request.url.query.id)
       .then(data => {
-        responseHandler(null, 'JSON', data)
+        responseHandler.sendJSON(response, data.code, data.data)
       })
       .catch(err => {
-        responseHandler(err)
+        responseHandler.sendText(response, 400, err)
       })
   })
-  router.put('./dogs', function(req, res) {
-    storage.putItem(item)
+  router.post('/dogs', function(request, response) {
+    storage.postItem(request.body)
       .then(data => {
-        responseHandler(null, 'JSON', data)
+        responseHandler.sendJSON(response, data.code, data.data)
       })
       .catch(err => {
-        responseHandler(err)
+        responseHandler.sendText(response, 400, err)
       })
   })
-  router.delete('./dogs', function(req, res) {
-    storage.deleteItem(item)
+  router.put('/dogs', function(request, response) {
+    storage.putItem(request.body)
       .then(data => {
-        responseHandler(null, 'JSON', data)
+        responseHandler.sendJSON(response, data.code, data.data)
       })
       .catch(err => {
-        responseHandler(err)
+        responseHandler.sendText(response, 400, err)
+      })
+  })
+  router.delete('/dogs', function(request, response) {
+    storage.deleteItem(request.url.query.id)
+      .then(data => {
+        responseHandler.sendText(response, data.code, data.text)
+      })
+      .catch(err => {
+        responseHandler.sendText(response, 400, err)
       })
   })
 }

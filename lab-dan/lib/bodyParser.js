@@ -5,20 +5,29 @@ module.exports = function(request) {
     if (request.method === 'POST' || request.method === 'PUT') {
       request.body = ''
 
-      request.on('data', function(data){
+      request.on('data', data => {
         request.body += data.toString()
       })
 
-      request.on('end', function(){
+      request.on('end', () => {
         try {
           request.body = JSON.parse(request.body)
-          resolve(request)
+          console.log('My request body has type:', typeof request.body)
+          console.log('Request.body = ', request.body)
+          return resolve(request)
         } catch (err) {
-          reject(err)
+          return reject(err)
         }
       })
+
+      request.on('error', err => {
+        return reject(err)
+      })
+
+      return
+
     }
     // immediately resolve for a GET or DELETE request
-    resolve(request)
+    resolve()
   })
 }
