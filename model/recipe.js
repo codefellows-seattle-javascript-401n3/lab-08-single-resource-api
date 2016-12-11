@@ -2,8 +2,8 @@
 
 const uuid = require('node-uuid');
 
-module.exports = function(name, symptoms) {
+module.exports = function(name, ingredients) {
   this.name = name;
-  this.symptoms = symptoms;
+  this.ingredients = ingredients;
   this.id = uuid.v4();
 };
