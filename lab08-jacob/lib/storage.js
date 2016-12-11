@@ -1,16 +1,28 @@
-let storage = {};
-let blueBird = require('bluebird');
-let fs = blueBird.promisifyAll(require('fs'), {suffix: 'Prom'});
+const Promise = require('bluebird');
+let fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 //don't forget to install bluebird
 
-fs.readFileProm('file').then; //uses bluebird to write fs in a promise wrapper
+exports.createItem = function(schemaName, item) {
+  if (!schemaName) return Promise.reject(new Error('expected schema name'));
+  if (!item) return Promise.reject(new Error('expected item'));
+  let json = JSON.stringify(item);
+  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
+  .then(() => item) //not sure I know what this exactly does.
+  .catch(err => Promise.reject(err));
+};
 
-fs.writeFileProm('file').then;
+exports.fetchItem = function(schemaName, id) {
+  if (!schemaName) return Promise.reject(new Error('expected schema name'));
+  if (!id) return Promise.reject(new Error('expected id'));
 
-storage.fetchItem = function(item) {
-  return fs.readFileProm(`${__dirname}/../data/data.json`)
-    .then(data => {
-      let item  = JSON.parse(data.toString());
+  return fs.readFileProm(`${__dirname}/../data/${schemaName}/${id}.json`)
+  .then(data => {
+    try {
+      let item = JSON.parse(data.toString());
       return item;
-    });
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  })
+  .catch(err => Promise.reject(err));
 };

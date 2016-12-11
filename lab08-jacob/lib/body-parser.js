@@ -11,7 +11,7 @@ function parseBody(req) { //no callback param b/c it's a promise
           resolve(req); //Pass the req.body JSON object out of the function
         } catch (err) {
           console.error(err);
-          reject(err); //error handing
+          reject(err); //need to put try catch in case it is invalid JSON.
         }
       });
       req.on('error', err => {
@@ -21,7 +21,7 @@ function parseBody(req) { //no callback param b/c it's a promise
       return;
     }
     resolve(); //
-  });//promise is returned when parseBody is called. 
+  });//promise is returned when parseBody is called.
 }
 
 module.exports = parseBody;
