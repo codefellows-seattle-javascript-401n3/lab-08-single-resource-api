@@ -2,7 +2,7 @@
 
 let storage = require('./model/storage.js');
 let response = require('./lib/response.js'); //does not exist yet
-let book = require('./model/book.js');
+let Book = require('./model/book.js');
 
 module.exports = function(router) {
   router.get('api/books', function(req, res) {
@@ -19,5 +19,22 @@ module.exports = function(router) {
     }
     response.sendText(res, 400, 'bad request');
   });
-  // router.post()
+  router.post('api/books', function(req, res) {
+    try {
+      let book = new Book(); //req.body.name -> something like this
+      storage.createItem('book', book);
+      res.writeHead(200, {
+        'Content-type' : 'application/json',
+      });
+      res.write(JSON.stringify(book));
+      res.end();
+    } catch (err) {
+      console.error(err);
+      res.writeHead(400, {
+        'Content-type' : 'text/plain',
+      });
+      res.write('bad request');
+      res.end();
+    }
+  });
 };
