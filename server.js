@@ -9,6 +9,9 @@ const server = http.createServer(router.routes());
 
 //setup router.method logic. what's going on here? what does router.get take in as parameters? if resolved, what? if rejected, what?
 
+
+//dependency injection (kinda like IIFE) 
+
 server.listen(PORT, () => {
   console.log('serving port 3000');
 });
