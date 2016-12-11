@@ -35,16 +35,16 @@ module.exports = function(router){
   //  * pass an `?id=<uuid>` in the query string to delete a specific resource
   //  * should return 204 status with no content in the body
 
-  // router.delete('/api/books', function(req, res) {
-  //   if (req.url.query.id) {
-  //     storage.deleteItem('book', req.url.query.id)
-  //     .then(() => {
-  //       response.sendText(res, 204, 'no content in the body after a delete');
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //       response.sendText(res, 404, 'could not delete a file that does not exist');
-  //     });
-  //   }
-  // });
+  router.delete('/api/books', function(req, res) {
+    if (req.url.query.id) {
+      storage.deleteItem('book', req.url.query.id)
+      .then(() => {
+        response.sendText(res, 204, 'no content in the body after a delete');
+      })
+      .catch(err => {
+        console.error(err);
+        response.sendText(res, 404, 'could not delete a file that does not exist');
+      });
+    }
+  });
 };

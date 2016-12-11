@@ -1,6 +1,7 @@
 // * Create a storage module that will store resources by their type and id
 'use strict';
 
+const del = require('del');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
@@ -8,7 +9,7 @@ const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
 module.exports = exports = {};
 
-exports.createItem = function(schemaName, item){
+exports.createItem = function(schemaName, item) {
   // do error handling
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!item) return Promise.reject(new Error('expected item'));
@@ -21,7 +22,7 @@ exports.createItem = function(schemaName, item){
   .catch( err => Promise.reject(err));
 };
 
-exports.fetchItem = function(schemaName, id){
+exports.fetchItem = function(schemaName, id) {
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!id) return Promise.reject(new Error('expected id'));
 
@@ -35,16 +36,17 @@ exports.fetchItem = function(schemaName, id){
     }
   })
   .catch(err => Promise.reject(err));
+};
 
-  // do error handling
-  //return new Promise((resolve, reject) => {
-    //if (!schemaName) return reject(new Error('expected schemaName'));
-    //if (!id) return reject(new Error('expected id'));
+exports.deleteItem = function(schemaName, id) {
+  if (!schemaName) return Promise.reject(new Error('expected schemaName'));
+  if (!id) return Promise.reject(new Error('expected id'));
 
-    //var schema = storage[schemaName];
-    //if(!schema) return reject(new Error('schema not found'));
-    //var item = schema[id];
-    //if(!item) return reject(new Error('item not found'));
-    //resolve(item);
-
+  if(fs.existsSync(`${__dirname}/../data/${schemaName}/${id}.json`)) {
+    del([`${__dirname}/../data/${schemaName}/${id}.json`])
+    .then(paths => {
+      console.log('Deleted files and folders:\n', paths.join('\n'));
+    })
+    .catch(err => Promise.reject(err));
+  }
 };
