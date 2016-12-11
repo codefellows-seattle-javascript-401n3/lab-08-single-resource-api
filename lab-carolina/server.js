@@ -1,16 +1,15 @@
 'use strict';
 
-// node modules
+
 const http = require('http');
-// npm modules
-// app modules
+
+
 const Song = require('./model/song.js');
 const Router = require('./lib/router.js');
 const storage = require('./lib/storage.js');
-// module constants
+
 const PORT = process.env.PORT || 3000;
 const router = new Router();
-// module logic
 
 router.get('/api/song', function(req, res) {
   if (req.url.query.id) {
@@ -48,6 +47,27 @@ router.post('/api/song', function(req,res) {
     res.end();
   }
 });
+
+router.delete('/api/song', function(req, res){
+  if(req.url.query.id){
+    storage.deleteItem('song', req.url.query.id)
+    .then(() => {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.end();
+    })
+    .catch(err => {
+      console.error(err);
+      res.writeHead(404, {'Content-Type': 'text/plain'});
+      res.write('not found');
+      res.end();
+    });
+    return;
+  }
+  res.writeHead(400, {'Content-Type': 'text/plain'});
+  res.write('bad request');
+  res.end();
+});
+
 
 const server = http.createServer(router.route());
 
