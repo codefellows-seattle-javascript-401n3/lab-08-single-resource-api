@@ -31,7 +31,7 @@ Router.prototype.route = function(){
       parseJSON(req),
     ])
     .then(() => {
-      if(typeof this.routes[req.method][req.url.pathname] === 'function'){
+      if(this.routes[req.method][req.url.pathname]){
         this.routes[req.method][req.url.pathname](req, res);
         return;
       }
