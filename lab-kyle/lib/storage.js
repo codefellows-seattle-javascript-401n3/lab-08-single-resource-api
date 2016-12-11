@@ -15,10 +15,20 @@ exports.createItem = function(schemaName, item){
 };
 
 exports.fetchItem = function(schemaName, id) {
-  if (!schemaName) return Promise.reject(new Error('expected schema'))
-  if (!id) return Promise.reject(new Error('expected id'))
+  if (!schemaName) return Promise.reject(new Error('expected schema'));
+  if (!id) return Promise.reject(new Error('expected id'));
 
-  if (!storage[schemaName]) return Promise.reject(new Error('schema does not exist'))
+  if (!storage[schemaName]) return Promise.reject(new Error('schema does not exist'));
 
   return Promise.resolve(storage[schemaName][id]);
-}
+};
+
+exports.deleteItem = function(schemaName, id) {
+  if (!schemaName) return Promise.reject(new Error('expected schema'));
+  if (!id) return Promise.reject(new Error('expected id'));
+
+  if (!storage[schemaName]) return Promise.reject(new Error('schema does not exist'));
+
+  delete storage[schemaName][id];
+  return Promise.resolve();
+};

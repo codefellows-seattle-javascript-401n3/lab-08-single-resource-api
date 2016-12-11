@@ -7,7 +7,7 @@ exports.sendJSON = function(res, status, data){
 };
 
 exports.sendText = function(res, status, data){
-  res.writeHEAD(status, {'Content-Type': 'text/plain'});
-  res.Write(data);
+  res.writeHead(status, {'Content-Type': 'text/plain'});
+  res.write(data);
   res.end();
 };

@@ -1,5 +1,5 @@
-const parsedUrl = require('../model/parse-url');
-const parsedBody = require('../model/parse-body');
+const parsedUrl = require('../lib/parse-url');
+const parsedBody = require('../lib/parse-body');
 
 const Router = module.exports = function(){
   this.routes = {
