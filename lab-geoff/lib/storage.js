@@ -31,8 +31,12 @@ exports.fetchItem = function(schemaName, id) {
   }
   return fs.readFileProm('path to file')
     .then(data => {
-      let item = JSON.parse(data.toString());
-      return item;
+      try {
+        let item = JSON.parse(data.toString());
+        return item;
+      } catch(err) {
+        return Promise.reject(err);
+      }
     })
     .catch(err => {
       return Promise.reject(err);
