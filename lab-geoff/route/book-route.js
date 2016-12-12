@@ -38,4 +38,7 @@ module.exports = function(router) {
       res.end();
     }
   });
+  router.delete('/books', function(req, res) {
+    //placeholder
+  });
 };
