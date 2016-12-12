@@ -21,7 +21,16 @@ exports.fetchItem = function(schemaName, id) {
 
   if (!storage[schemaName]) return Promise.reject(new Error('schema does not exist'));
   if (!storage[schemaName][id]) return Promise.reject(new Error('id does not exist'));
+
   return Promise.resolve(storage[schemaName][id]);
+};
+
+exports.fetchAll = function(schemaName) {
+  var all = [];
+  for (var key in storage[schemaName]) {
+    all.push(key);
+  }
+  return Promise.resolve(all);
 };
 
 exports.deleteItem = function(schemaName, id) {
