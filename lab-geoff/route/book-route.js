@@ -6,7 +6,7 @@ let Book = require('../model/book.js');
 
 module.exports = function(router) {
   router.get('/books', function(req, res) {
-    if(req.url.query.id) {
+    if (req.url.query.id) {
       storage.fetchItem('books', req.url.query.id)
         .then(book => {
           response.sendJSON(res, 200, book);
@@ -17,7 +17,6 @@ module.exports = function(router) {
         });
       return;
     }
-    console.log(response.sendText);
     response.sendText(res, 400, 'bad request');
   });
   router.post('/books', function(req, res) {
@@ -39,6 +38,19 @@ module.exports = function(router) {
     }
   });
   router.delete('/books', function(req, res) {
-    //placeholder
+    if (req.url.query.id) {
+      console.log('delete here');
+      storage.fetchItem('books', req.url.query.id)
+        .then(book => {
+          delete storage[book];
+          console.log(book + ' has been deleted');
+        })
+        .catch(err => {
+          console.error(err);
+          response.sendText(res, 404, 'not found');
+        });
+    }
+    console.log('no id to delete');
+    response.sendText(res, 400, 'bad request');
   });
 };
