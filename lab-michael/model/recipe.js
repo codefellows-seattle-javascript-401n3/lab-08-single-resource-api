@@ -2,10 +2,10 @@
 
 const uuid = require('node-uuid');
 
-module.exports = function(name, content) {
+module.exports = function(name, content, mealType) {
   if (!name) return new Error('need a name');
   if (!content) return new Error('need info');
-  if (!meanType) return new Error('need type of meal')
+  if (!mealType) return new Error('need type of meal')
   this.id = uuid.v1();
   this.name = name;
   this.content = content;

@@ -17,6 +17,7 @@
   "author": "Michael Bishop",
   "license": "MIT",
   "devDependencies": {
+    "bluebird": "^3.4.6",
     "chai": "^3.5.0",
     "eslint": "^3.11.1",
     "gulp": "^3.9.1",
@@ -25,6 +26,6 @@
     "mocha": "^3.2.0"
   },
   "dependencies": {
-    "node-uuid": "1.4.7"
+    "node-uuid": "^1.4.7"
   }
 }
