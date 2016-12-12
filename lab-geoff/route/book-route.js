@@ -40,16 +40,18 @@ module.exports = function(router) {
   router.delete('/books', function(req, res) {
     if (req.url.query.id) {
       console.log('delete here');
-      storage.fetchItem('books', req.url.query.id)
-        .then(book => {
-          console.log(book);
-          console.log(storage);
-          // delete book;
+      storage.deleteItem('books', req.url.query.id)
+        .then(() => {
+          res.writeHead(204, {
+            'Content-type': 'text/plain',
+          });
+          res.end();
         })
         .catch(err => {
           console.error(err);
           response.sendText(res, 404, 'not found');
         });
+      return;
     }
     console.log('no id to delete');
     response.sendText(res, 400, 'bad request');

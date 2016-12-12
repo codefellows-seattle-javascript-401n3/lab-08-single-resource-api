@@ -29,7 +29,20 @@ exports.fetchItem = function(schemaName, id) {
     resolve(item);
   });
 };
-
+exports.deleteItem = function(schemaName, id) {
+  return new Promise((resolve, reject) => {
+    if (!schemaName) {
+      return reject(new Error('need schemaName'));
+    }
+    if (!id) {
+      return reject(new Error('need id'));
+    }
+    console.log(storage);
+    delete storage[schemaName][id];
+    console.log(storage);
+    resolve();
+  });
+};
 // let Promise = require('bluebird');
 // let fs = Promise.promisifyAll(require('fs'), {suffix:'Prom'});
 //
