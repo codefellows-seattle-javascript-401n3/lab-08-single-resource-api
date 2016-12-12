@@ -3,33 +3,45 @@ const response = require('../lib/response');
 const Pokemon = require('../model/resource');
 
 module.exports = function(router){
-  router.get('api/pokemon', function(req, res) {
+  router.get('/api/pokemon', function(req, res) {
     if (req.url.query.id) {
       storage.fetchItem('pokemon', req.url.query.id)
         .then( pokemon => {
           response.sendJSON(res, 200, pokemon);
         })
         .catch( err => {
-          console.err(err);
+          console.log(err);
           response.sendText(res, 404, 'not found');
         });
       return;
     }
-    response.sendTest(res, 400, 'bad request');
+    response.sendText(res, 400, 'bad request');
   });
 
-  router.post('api/pokemon', function(req, res) {
-    try {
-      var pokemon = new Pokemon(req.body.name, req.body.color);
-      storage.createItem('pokemon', pokemon);
-      res.writeHead(200, {'Content-Type': 'application/json'});
-      res.write(JSON.stringify(pokemon));
-      res.end();
-    } catch(err) {
-      console.error(err);
-      res.writeHead(44, {'Content-Type': 'text/plain'});
-      res.write('bad request');
-      res.end();
+  router.post('/api/pokemon', function(req, res) {
+    let pokemon = new Pokemon(req.body.name, req.body.color);
+    storage.createItem('pokemon', pokemon)
+      .then( pokemon => {
+        response.sendJSON(res, 200, pokemon);
+      })
+      .catch( err => {
+        console.error(err);
+        response.sendText(res, 400, 'bad request');
+      });
+  });
+
+  router.delete('/api/pokemon', function(req, res) {
+    if (req.url.query.id) {
+      storage.deleteItem('pokemon', req.url.query.id)
+        .then( data => {
+          response.sendText(res, 204, data);
+        })
+        .catch( err => {
+          console.error(err);
+          response.sendText(res, 404, 'not found');
+        });
+      return;
     }
+    response.sendText(res, 400, 'bad request');
   });
 };

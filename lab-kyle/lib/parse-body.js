@@ -9,7 +9,7 @@ module.exports = function(req) {
 
       req.on('end', () => {
         try {
-          req.body = JSON.pase(body);
+          req.body = JSON.parse(body);
           resolve(req);
         } catch (err) {
           console.error(err);

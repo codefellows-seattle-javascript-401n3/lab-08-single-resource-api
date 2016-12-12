@@ -18,9 +18,14 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "fetch": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
     "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "node-uuid": "^1.4.7"
   }
 }
