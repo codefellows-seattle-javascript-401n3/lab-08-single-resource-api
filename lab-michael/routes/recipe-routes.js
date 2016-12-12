@@ -14,11 +14,11 @@ module.exports - function(router) {
       })
       .catch( err => {
         console.error(err);
-        response.sendText(res, 404, 'not found');
+        response.sendText(res, 404, 'not found\n');
       });
       return;
     }
-    response.sendText(res,400, 'bad request');
+    response.sendText(res,400, 'bad request\n');
   });
 
   router.post('api/recipe', function(req,res) {

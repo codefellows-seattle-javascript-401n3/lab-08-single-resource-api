@@ -49,9 +49,6 @@ exports.deleteItem = function(recipe, id) {
 
     recipe = storage[recipe];
     if(!recipe) return reject(new Error('recipe not found'));
-    // var item = recipe[id];
-    // if(!item) return reject(new Error('item not found'));
-    // console.log('this is storage', item);
     delete recipe[id];
     resolve();
   });

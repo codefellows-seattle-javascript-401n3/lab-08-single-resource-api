@@ -12,14 +12,6 @@ const Router = module.exports = function() {      // Router Constructor
     DELETE: {}
   };
 };
-// function callback() {
-//   res.write('h');
-//   res.end();
-// }
-// if (path === '/recipes' && verb === 'GET') {
-//   callback();
-
-// }
 
 Router.prototype.get = function(endpoint, callback) {
   this.routes.GET[endpoint] = callback;

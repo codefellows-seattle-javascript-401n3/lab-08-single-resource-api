@@ -94,22 +94,3 @@ server.listen(PORT, function() {
   console.log('Server is listening d(- -)b', PORT);
 });
 
-// 'use strict';
-//
-//
-// const http = require('http');
-// // const uuid = require('node-uuid');
-//
-// const Recipe = require('./model/recipe.js');
-//
-// const PORT = process.env.PORT || 3000;
-// const router = new Router();
-// //register not routes
-//
-// require('./routes/recipe-routes.js')(router);
-//
-// const server = http.createServer(router.route());
-//
-// server.listen(PORT, function() {
-//   console.log('Server is listening d(- -)b', PORT);
-// });
