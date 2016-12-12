@@ -12,24 +12,24 @@ storage.data = {
   },
 }
 
-// let fs = blueBird.promisifyAll(require('fs'), { suffix: 'Promised'})
+let fs = blueBird.promisifyAll(require('fs'), { suffix: 'Promised'})
 
 // This is what a monkeyfied fs function looks like
 // fs.readFilePromised('file').then()
 // fs.writeFilePromised('file').then()
 
 storage.fetchItem = function(id) {
-  // return fs.readFilePromised(`${__dirname}/../data/data.json`)
-  //   .then(data => {
-  //     data = JSON.parse(data.toString())
-  //     return data[id]
-  //   })
-  if (!id) {
-    return storage.fetchAll()
-  } else if (typeof storage.data[id] === 'object') {
-    return Promise.resolve({code: 200, data: storage.data[id]})
-  }
-  return Promise.reject('not found\n')
+  return fs.readFilePromised(`${__dirname}/../data/data.json`)
+    .then(data => {
+      data = JSON.parse(data.toString())
+      return data[id]
+    })
+  // if (!id) {
+  //   return storage.fetchAll()
+  // } else if (typeof storage.data[id] === 'object') {
+  //   return Promise.resolve({code: 200, data: storage.data[id]})
+  // }
+  // return Promise.reject('not found\n')
 }
 
 storage.fetchAll = function() {
