@@ -27,6 +27,14 @@ describe('testing the routes for book api', function() {
         done();
       });
     });
+    it('should return 400 for a request with no body', function(done) {
+      request.post('http://localhost:3000/books')
+      .send({})
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        done();
+      });
+    });
   });
   describe('testing GET request', function() {
     it('should get a book from storage', function(done) {
