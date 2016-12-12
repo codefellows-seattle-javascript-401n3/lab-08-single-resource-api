@@ -1,25 +1,21 @@
-// * Create a storage module that will store resources by their type and id
 'use strict';
 
 const del = require('del');
+const mkdirp = require('mkdirp');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
-
-// const storage = {};
 
 module.exports = exports = {};
 
 exports.createItem = function(schemaName, item) {
-  // do error handling
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!item) return Promise.reject(new Error('expected item'));
-  //if(!storage[schemaName]) storage[schemaName] = {};
-  //storage[schemaName][item.id] = item;
-  //return Promise.resolve(item);
   let json = JSON.stringify(item);
-  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
-  .then( () => item)
-  .catch( err => Promise.reject(err));
+  mkdirp(`${__dirname}/../data/${schemaName}/`, function() {
+    fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
+    .then( () => item)
+    .catch( err => Promise.reject(err));
+  });
 };
 
 exports.fetchItem = function(schemaName, id) {
