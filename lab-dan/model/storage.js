@@ -24,7 +24,9 @@ storage.fetchItem = function(id) {
   //     data = JSON.parse(data.toString())
   //     return data[id]
   //   })
-  if (typeof storage.data[id] === 'object') {
+  if (!id) {
+    return storage.fetchAll()
+  } else if (typeof storage.data[id] === 'object') {
     return Promise.resolve({code: 200, data: storage.data[id]})
   }
   Promise.reject(new Error('Object does not exist'))
@@ -48,10 +50,7 @@ storage.putItem = function(obj) {
     })
     return Promise.resolve({code: 200, data: storage.data[obj.id]})
   } else {
-    // storage.postItem(obj)
-    let newItem = new objectConstructor(obj.name, obj.breed)
-    storage.data[newItem.id] = newItem
-    return Promise.resolve({code: 201, data: storage.data[newItem.id]})
+    return storage.postItem(obj)
   }
 }
 
