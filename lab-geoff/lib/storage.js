@@ -1,9 +1,7 @@
 'use strict';
 
-let bluebird = require('bluebird'); //maybe should be Promise here
-let fs = bluebird.promisifyAll(require('fs'), {suffix:'Prom'});
-
-// let storage = {}; //not sure here
+let Promise = require('bluebird');
+let fs = Promise.promisifyAll(require('fs'), {suffix:'Prom'});
 
 exports.createItem = function(schemaName, item) {
   if(!schemaName) {
@@ -13,7 +11,7 @@ exports.createItem = function(schemaName, item) {
     return Promise.reject(new Error('need item'));
   }
   let json = JSON.stringify(item);
-  return fs.writeFileProm('path to file', json)
+  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
     .then(() => {
       item;
     })
@@ -29,7 +27,7 @@ exports.fetchItem = function(schemaName, id) {
   if(!id) {
     return Promise.reject(new Error('need id'));
   }
-  return fs.readFileProm('path to file')
+  return fs.readFileProm(`${__dirname}/../data${schemaName}/${id}.json`)
     .then(data => {
       try {
         let item = JSON.parse(data.toString());
