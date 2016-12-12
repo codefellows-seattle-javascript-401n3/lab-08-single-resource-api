@@ -17,14 +17,15 @@ httpServer.on('/', function(req, res) {
 
 httpServer.get('/api/myresource', function(req, res) {
   if (req.url.query.id) {
-    let resource = resourceManager.getResource(req.body.query.id);
-    if (resource) {
-      res.out(resource);
-    } else {
-      res.out('Not found.', 404);
-    }
+    resourceManager.getResource(req.body.query.id, function(resource) {
+      if (resource) {
+        res.out(resource);
+      } else {
+        res.out('Not found.', 404);
+      }
+    });
   } else {
-    let keys = resourceManager.getKeys();
+    let keys = resourceManager.getResourceIdList();
     if (keys) {
       res.out({ keys: keys });
     } else {
