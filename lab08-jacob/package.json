@@ -12,7 +12,8 @@
     "chai": "^3.5.0",
     "eslint": "^3.11.1",
     "gulp": "^3.9.1",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "superagent": "^3.2.0"
   },
   "dependencies": {
     "bluebird": "^3.4.6",

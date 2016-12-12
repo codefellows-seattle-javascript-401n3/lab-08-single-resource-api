@@ -19,6 +19,13 @@ module.exports = function(router) {
   });
 
   router.post('/api/users', function(req, res) {
+    if(Object.keys(req.body).length === 0) {
+      res.writeHead(400, {'Content-Type': 'text/plain',
+      });
+      res.write('include body');
+      res.end();
+      return;
+    }
     try {
       var user = new User(req.body.username);
       storage.createItem('users', user);

@@ -11,5 +11,5 @@ exports.sendText = function(res, status, msg) {
     'Content-Type': 'text/plain',
   });
   res.write(msg);
-  res.end;
+  res.end();
 };
