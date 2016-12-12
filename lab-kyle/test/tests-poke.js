@@ -79,11 +79,11 @@ describe('a restful endpoint', function() {
         done();
       });
     });
-    it('will respond with "bad id" if no id was provided', function(done) {
+    it('will respond with a list of ids if no id is provided', function(done) {
       request.get(`${url}/pokemon?id`)
       .end(function(err, res) {
-        expect(res.status).to.equal(400);
-        expect(res.text).to.equal('bad request');
+        expect(res.status).to.equal(200);
+        expect(res.body).to.eql([`${pokemon.id}`]);
         done();
       });
     });
@@ -95,7 +95,6 @@ describe('a restful endpoint', function() {
       .end(function(err, res) {
         if (err) return done(err);
         expect(res.status).to.equal(204);
-        // expect(res.body).to.equal({});
         done();
       });
     });

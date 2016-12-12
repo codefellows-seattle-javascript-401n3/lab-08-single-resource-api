@@ -10,7 +10,18 @@ module.exports = function(router){
           response.sendJSON(res, 200, pokemon);
         })
         .catch( err => {
-          console.log(err);
+          console.error(err);
+          response.sendText(res, 404, 'not found');
+        });
+      return;
+    } else if (!req.url.query.id) {
+      storage.fetchAll('pokemon')
+        .then( data => {
+          console.log(data);
+          response.sendJSON(res, 200, data);
+        })
+        .catch(err => {
+          console.error(err);
           response.sendText(res, 404, 'not found');
         });
       return;
