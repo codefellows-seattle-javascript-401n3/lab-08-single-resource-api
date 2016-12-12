@@ -18,16 +18,14 @@ module.exports = function(router){
       });
       return;
     }
-
-    // storage.fetchAll('book')
-    // .then(bookArr => {
-    //   response.sendJSON(res, 200, bookArr);
-    // })
-    // .catch(err => {
-    //   console.error(err);
-    // });
-
-    response.sendText(res, 400, 'bad request');
+    
+    storage.fetchAll('book')
+    .then(bookArr => {
+      response.sendJSON(res, 200, bookArr);
+    })
+    .catch(err => {
+      console.error(err);
+    });
   });
 
   router.post('/api/books', function(req, res) {

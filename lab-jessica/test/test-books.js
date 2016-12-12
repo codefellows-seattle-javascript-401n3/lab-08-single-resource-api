@@ -49,7 +49,7 @@ describe('testing book routes', function() {
       });
     });
   });
-  
+
   describe('testing GET /api/books', function() {
     it('should return a book given an id', function(done) {
       request.get(`localhost:3000/api/books?id=${book.id}`)
@@ -68,11 +68,10 @@ describe('testing book routes', function() {
         done();
       });
     });
-    it('should respond with  400 along with bad request when no id provided', function(done) {
+    it('should respond with an array of ids for all books in storage', function(done) {
       request.get('localhost:3000/api/books')
       .end((err, res) => {
-        expect(res.status).to.equal(400);
-        expect(res.text).to.equal('bad request' + '\n');
+        expect(res.status).to.equal(200);
         done();
       });
     });

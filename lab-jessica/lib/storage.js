@@ -25,6 +25,13 @@ exports.fetchItem = function(schemaName, id) {
   return Promise.resolve(item);
 };
 
+exports.fetchAll = function(schemaName) {
+  if(!schemaName) return Promise.reject(new Error('expected schemaName'));
+
+  if(!storage[schemaName]) return Promise. reject(new Error('schema not found'));
+  return Promise.resolve(Object.keys(storage[schemaName]));
+};
+
 exports.deleteItem = function(schemaName, id) {
   if(!schemaName) return Promise.reject(new Error('expected schemaName'));
   if(!id) return Promise.reject(new Error('expected id'));
