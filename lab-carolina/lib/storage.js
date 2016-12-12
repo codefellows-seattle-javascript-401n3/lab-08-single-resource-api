@@ -16,7 +16,7 @@ exports.createItem = function(schemaName, item){
   // return Promise.resolve(item);
 
   let json = JSON.stringify(item);
-  return fs.writeFileProm('${__dirname}/../data/${schemaName}/${item.id}.json', json)
+  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
   .then(() => item)
   .catch(err => Promise.reject(err));
 };
@@ -26,7 +26,7 @@ exports.fetchItem = function(schemaName, id){
   if(!schemaName) return Promise.reject(new Error('expected schemaName'));
   if(!id) return Promise.reject(new Error('expected id'));
 
-  return fs.readFileProm('${__dirname}/../data/${schemaName}/${id}.json')
+  return fs.readFileProm(`${__dirname}/../data/${schemaName}/${id}.json`)
   .then(data => {
     try{
       let item = JSON.parse(data.toString());
@@ -52,7 +52,7 @@ exports.deleteItem = function(schemaName, id){
   if(!schemaName) return Promise.reject(new Error('schema not found'));
   if(!id) return Promise.reject(new Error('id not found'));
 
-  return fs.unlinkProm('{__dirname}/../data/${schemaName}/${id}.json')
+  return fs.unlinkProm(`${__dirname}/../data/${schemaName}/${id}.json`)
   .catch(err => Promise.reject(err));
 };
   // return new Promise((resolve, reject) =>{
