@@ -27,7 +27,7 @@ exports.fetchItem = function(schemaName, id) {
   if(!id) {
     return Promise.reject(new Error('need id'));
   }
-  return fs.readFileProm(`${__dirname}/../data${schemaName}/${id}.json`)
+  return fs.readFileProm(`${__dirname}/../data/${schemaName}/${id}.json`)
     .then(data => {
       try {
         let item = JSON.parse(data.toString());
