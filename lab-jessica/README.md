@@ -15,6 +15,7 @@ In this project you are able to use HTTP methods to perform CRUD operations on m
 
 * `GET` request
   * Pass an `?id=<uuid>` in the query string to retrieve a specific book as json
+  * If no id is provided, an array of id's for all books will be returned
   * Example curl request:
 
   `curl localhost:3000/api/books?id=1d5bf500-4c37-4185-8533-53dbbe200596`
@@ -31,6 +32,5 @@ In this project you are able to use HTTP methods to perform CRUD operations on m
 ### `/api/books`
 
 * `GET` request made for a non-existing id will return a 404 error status
-* `GET` request made without an id passed into the querystring will return a 400 error status.
 * `POST` request with no body provided or an invalid body will return a 400 error status
 * Unregistered routes will return a 404 error status
