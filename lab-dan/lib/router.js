@@ -21,9 +21,7 @@ function Router () {
 })
 
 Router.prototype.route = function () {
-  console.log('route function called')
   return (request, response) => {
-    console.log('inside route handler. Handling request url:', request.url)
     Promise.all([
       urlParser(request),
       bodyParser(request),
@@ -31,11 +29,9 @@ Router.prototype.route = function () {
       if(typeof this.routes[request.method][request.url.pathname] === 'function') {
         return this.routes[request.method][request.url.pathname](request, response)
       }
-
-      console.error('PATH NOT FOUND FOR:', request.url.pathname)
-      return responseHandler.sendText(response, 400, new Error('PATH NOT FOUND FOR:' + request.url.pathname))
+      return responseHandler.sendText(response, 400, 'PATH NOT FOUND FOR:' + request.url.pathname)
     })
-    .catch(error => responseHandler.sendText(response, 400, error))
+    .catch(error => responseHandler.sendText(response, 400, error.message))
   }
 }
 

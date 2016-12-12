@@ -8,9 +8,8 @@ const storage = require('./model/storage')
 let router = new Router()
 require('./routes/dog-routes')(router, storage)
 
-console.log(router)
-
 // init server
 const server = Server.start(router.route())
 
-console.log('Check server status good =', server.listening)
+// for testing purposes
+module.exports = server

@@ -11,7 +11,11 @@ response.sendJSON = function(response, status, data) {
 
 response.sendText = function(response, status, text) {
   response.writeHeader(status, {'Content-Type':'text/plain'})
-  response.write(text)
+  if(text){
+    response.write(text)
+  } else {
+    response.write('empty response')
+  }
   response.end()
 }
 

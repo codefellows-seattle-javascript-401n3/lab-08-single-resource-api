@@ -12,8 +12,6 @@ module.exports = function(request) {
       request.on('end', () => {
         try {
           request.body = JSON.parse(request.body)
-          console.log('My request body has type:', typeof request.body)
-          console.log('Request.body = ', request.body)
           return resolve(request)
         } catch (err) {
           return reject(err)

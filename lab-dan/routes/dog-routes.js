@@ -7,7 +7,7 @@ module.exports = (router, storage) => {
   // router expects 3 different things: verb, route, and callback
   // one callback per verb/route combo
   router.get('/', function(request, response) {
-    responseHandler.sendText(response, 200, 'Hello, world! This is the amazing dog api\n')
+    responseHandler.sendText(response, 200, 'Hello, world! This is the amazing dogs api\n')
   })
 
   router.get('/dogs/all', function(request, response) {
@@ -29,6 +29,7 @@ module.exports = (router, storage) => {
         responseHandler.sendText(response, 400, err)
       })
   })
+
   router.post('/dogs', function(request, response) {
     storage.postItem(request.body)
       .then(data => {
@@ -38,6 +39,7 @@ module.exports = (router, storage) => {
         responseHandler.sendText(response, 400, err)
       })
   })
+
   router.put('/dogs', function(request, response) {
     storage.putItem(request.body)
       .then(data => {
@@ -47,6 +49,7 @@ module.exports = (router, storage) => {
         responseHandler.sendText(response, 400, err)
       })
   })
+
   router.delete('/dogs', function(request, response) {
     storage.deleteItem(request.url.query.id)
       .then(data => {
