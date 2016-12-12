@@ -7,6 +7,7 @@ exports.createItem = function(schemaName, item) {
     storage[schemaName] = {};
   }
   storage[schemaName][item.id] = item;
+  console.log(storage);
   return Promise.resolve(item);
 };
 exports.fetchItem = function(schemaName, id) {

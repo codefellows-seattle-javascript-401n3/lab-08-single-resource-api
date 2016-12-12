@@ -42,8 +42,9 @@ module.exports = function(router) {
       console.log('delete here');
       storage.fetchItem('books', req.url.query.id)
         .then(book => {
-          delete storage[book];
-          console.log(book + ' has been deleted');
+          console.log(book);
+          console.log(storage);
+          // delete book;
         })
         .catch(err => {
           console.error(err);

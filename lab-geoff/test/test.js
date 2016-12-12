@@ -29,4 +29,14 @@ describe('testing the routes for book api', function() {
       });
     });
   });
+  describe('testing DELETE request', function() {
+    it('should remove the book from storage', function(done) {
+      request.delete(`http://localhost:3000/books?id=${book.id}`)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.id).to.equal(book.id);
+        done();
+      });
+    });
+  });
 });
