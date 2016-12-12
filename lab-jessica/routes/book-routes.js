@@ -5,6 +5,7 @@ const response = require('../lib/response.js');
 const Book = require('../model/book.js');
 
 module.exports = function(router){
+
   router.get('/api/books', function(req, res) {
     if (req.url.query.id) {
       storage.fetchItem('book', req.url.query.id)
@@ -17,6 +18,15 @@ module.exports = function(router){
       });
       return;
     }
+
+    // storage.fetchAll('book')
+    // .then(bookArr => {
+    //   response.sendJSON(res, 200, bookArr);
+    // })
+    // .catch(err => {
+    //   console.error(err);
+    // });
+
     response.sendText(res, 400, 'bad request');
   });
 
@@ -30,8 +40,6 @@ module.exports = function(router){
       response.sendText(res, 400, 'bad request');
     }
   });
-
-  //  * should return 204 status with no content in the body
 
   router.delete('/api/books', function(req, res) {
     if (req.url.query.id) {
