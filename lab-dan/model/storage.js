@@ -6,7 +6,7 @@ let storage = {}
 storage.data = {
   '1234-test-obj': {
     id: '1234-test-obj',
-    creationDate: Date(12/11/2016),
+    creationDate: new Date(12/11/2016),
     name: 'Test',
     breed: 'Shiba',
   },
@@ -29,7 +29,7 @@ storage.fetchItem = function(id) {
   } else if (typeof storage.data[id] === 'object') {
     return Promise.resolve({code: 200, data: storage.data[id]})
   }
-  Promise.reject(new Error('Object does not exist'))
+  return Promise.reject('not found\n')
 }
 
 storage.fetchAll = function() {
@@ -58,7 +58,7 @@ storage.deleteItem = function(id) {
   if(id){
     try {
       delete storage.data[id]
-      return Promise.resolve({code: 200, text: 'Delete completed'})
+      return Promise.resolve({code: 204, text: 'Delete completed'})
     } catch(err) {
       return Promise.reject(err.message)
     }

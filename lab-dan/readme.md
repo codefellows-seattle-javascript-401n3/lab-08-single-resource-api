@@ -27,4 +27,4 @@ PUT ```/dog``` (```{id: [ID], name: [NAME], breed: [BREED]}```) -- update an exi
   the updated or new JSON object.
 
 DELETE /dogs?id="existing-uuid" -- delete an existing record. It will return the text
-```delete completed``` and a ```200``` status code if successful.
+```delete completed``` and a ```204``` status code if successful.

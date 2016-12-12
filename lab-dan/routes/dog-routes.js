@@ -26,7 +26,7 @@ module.exports = (router, storage) => {
         responseHandler.sendJSON(response, data.code, data.data)
       })
       .catch(err => {
-        responseHandler.sendText(response, 400, err)
+        responseHandler.sendText(response, 404, err)
       })
   })
 

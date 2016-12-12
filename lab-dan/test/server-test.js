@@ -25,6 +25,31 @@ describe('this is a basic test that my server spins up', function() {
       })
   })
 
+  it('should get a 404 response with \'not found\' for a GET request to \'/dogs?id=nonexistentid\'', function(done) {
+    chai.request(app)
+      .get('/dogs?id=nonexistentid')
+      .end(function(err, res) {
+        expect(res).to.have.status(404)
+        expect(res).to.be.text
+        expect(res.text).to.be.equal('not found\n')
+        done()
+      })
+  })
+
+  it('should get a 200 response with the correct object for a GET request to \'/dogs?id=1234-test-obj\'', function(done) {
+    chai.request(app)
+      .get('/dogs?id=1234-test-obj')
+      .end(function(err, res) {
+        let data = JSON.parse(res.text)
+        expect(err).to.be.null
+        expect(res).to.have.status(200)
+        expect(res).to.have.header('Content-Type', 'application/json')
+        expect(data.name).to.be.equal('Test')
+        expect(data.breed).to.be.equal('Shiba')
+        done()
+      })
+  })
+
   it('should get a 201 response with a correct object for a POST request to \'/dogs\'', function(done) {
     let testName = 'POSTtest'
     let testBreed = 'POSTtest'
@@ -83,7 +108,7 @@ describe('this is a basic test that my server spins up', function() {
       .del(`/dogs?id=${testID}`)
       .end(function(err, res) {
         expect(err).to.be.null
-        expect(res).to.have.status(200)
+        expect(res).to.have.status(204)
         done()
       })
   })
