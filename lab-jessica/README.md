@@ -6,19 +6,19 @@ In this project you are able to use HTTP methods to perform CRUD operations on m
 
 ### `/api/books`
 
-* `POST` request
+- `POST` request
 * Pass data as stringifed json in the body of a post request to create a book
 * Data passed in must be an object with a title and author property
-Example curl request: `curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"title": "Harry Potter", "author": "J.K. Rowling"}' localhost:3000/api/books`
+Example curl request: ```curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"title": "Harry Potter", "author": "J.K. Rowling"}' localhost:3000/api/books```
 
-* `GET` request
+- `GET` request
 * Pass an `?id=<uuid>` in the query string to retrieve a specific book as json
-Example curl request: `curl localhost:3000/api/books?id=1d5bf500-4c37-4185-8533-53dbbe200596`
+Example curl request: ```curl localhost:3000/api/books?id=1d5bf500-4c37-4185-8533-53dbbe200596```
 
-* `DELETE` request
+- `DELETE` request
 * Pass an `?id=<uuid>` in the query string to delete a specific book
 * Should return 204 status with no content in the body
-Example curl request: `curl -X DELETE localhost:3000/api/books?id=1d5bf500-4c37-4185-8533-53dbbe200596`
+Example curl request: ```curl -X DELETE localhost:3000/api/books?id=1d5bf500-4c37-4185-8533-53dbbe200596```
 
 ## Errors Codes
 
