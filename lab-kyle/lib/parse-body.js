@@ -8,7 +8,6 @@ module.exports = function(req) {
       });
 
       req.on('end', () => {
-        console.log(body);
         try {
           req.body = JSON.parse(body);
           resolve(req);

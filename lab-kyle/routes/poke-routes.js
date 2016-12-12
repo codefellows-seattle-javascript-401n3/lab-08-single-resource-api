@@ -10,7 +10,7 @@ module.exports = function(router){
           response.sendJSON(res, 200, pokemon);
         })
         .catch( err => {
-          console.error(err);
+          console.log(err);
           response.sendText(res, 404, 'not found');
         });
       return;
@@ -19,25 +19,22 @@ module.exports = function(router){
   });
 
   router.post('/api/pokemon', function(req, res) {
-    try {
-      var pokemon = new Pokemon(req.body.name, req.body.color);
-      storage.createItem('pokemon', pokemon);
-      res.writeHead(200, {'Content-Type': 'application/json'});
-      res.write(JSON.stringify(pokemon));
-      res.end();
-    } catch(err) {
-      console.error(err);
-      res.writeHead(404, {'Content-Type': 'text/plain'});
-      res.write('bad request');
-      res.end();
-    }
+    let pokemon = new Pokemon(req.body.name, req.body.color);
+    storage.createItem('pokemon', pokemon)
+      .then( pokemon => {
+        response.sendJSON(res, 200, pokemon);
+      })
+      .catch( err => {
+        console.error(err);
+        response.sendText(res, 400, 'bad request');
+      });
   });
 
   router.delete('/api/pokemon', function(req, res) {
     if (req.url.query.id) {
       storage.deleteItem('pokemon', req.url.query.id)
         .then( data => {
-          response.sendText(res, 204);
+          response.sendText(res, 204, data);
         })
         .catch( err => {
           console.error(err);
