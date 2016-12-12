@@ -1,5 +1,7 @@
 let storage = {};
 
+let mkdirp = require('mkdirp');
+let path = require('path');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
@@ -10,9 +12,21 @@ exports.createItem = function(schemaName, item){
   if (!item) return Promise.reject(new Error('expected item'));
   if (!item.name && !item.color) return Promise.reject(new Error('item is not valid'));
 
-  if (!storage[schemaName]) storage[schemaName] = {};
-  storage[schemaName][item.id] = item;
-  return Promise.resolve(item);
+  // if (!storage[schemaName]) storage[schemaName] = {};
+  // storage[schemaName][item.id] = item;
+  // return Promise.resolve(item);
+
+  let json = JSON.stringify(item);
+  return fs.writeFileProm(`../lab-kyle/data/${schemaName}/${item.id}.json`, json)
+    .then( () => item)
+    .catch( err => {
+      if (err.code === 'ENOENT') {
+        // make the directory
+        mkdrip('')
+
+        fs.writeFileProm
+      }
+    }
 };
 
 exports.fetchItem = function(schemaName, id) {
