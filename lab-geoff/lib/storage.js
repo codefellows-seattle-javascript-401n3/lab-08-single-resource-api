@@ -1,4 +1,6 @@
 'use strict';
+let del = require('del');
+let mkdirp = require('mkdirp');
 
 let storage = {};
 
@@ -7,7 +9,6 @@ exports.createItem = function(schemaName, item) {
     storage[schemaName] = {};
   }
   storage[schemaName][item.id] = item;
-  console.log(storage);
   return Promise.resolve(item);
 };
 exports.fetchItem = function(schemaName, id) {
@@ -37,9 +38,7 @@ exports.deleteItem = function(schemaName, id) {
     if (!id) {
       return reject(new Error('need id'));
     }
-    console.log(storage);
     delete storage[schemaName][id];
-    console.log(storage);
     resolve();
   });
 };
