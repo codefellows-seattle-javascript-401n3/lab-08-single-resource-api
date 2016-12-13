@@ -3,7 +3,7 @@
 const http = require('http');
 const Router = require('./lib/router');
 const PORT = process.env.PORT || 3000;
-const router = Router();
+const router = new Router();
 
 //dependency injection (kinda like IIFE)
 require('./route/recipe-route')(router);

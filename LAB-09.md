@@ -1,5 +1,4 @@
 ![cf](https://i.imgur.com/7v5ASc8.png) lab-09-single-resource-api (SIMPLE PERSISTANCE)
-======
 
 # To Submit this Assignment
   * working for the same fork from lab-08
@@ -9,7 +8,7 @@
   * also describe how long the assignment took you
 
 # Resources
-Here are some npm modules that you may find useful for this project, it is not required for you to use them. 
+Here are some npm modules that you may find useful for this project, it is not required for you to use them.
 * [del](https://github.com/sindresorhus/del) - a npm module that makes deleting files easy
 * [mkdirp](https://github.com/substack/node-mkdirp) - like `mkdir -p` but Node.js
 

@@ -1,8 +1,8 @@
 'use strict';
 
-const storage = require('./storage/storage');
-const recipe = require('./model/recipe');
-const response = require('./lib/response-logic');
+const storage = require('../storage/storage');
+const recipe = require('../model/recipe');
+const response = require('../lib/response-logic');
 
 module.exports = function(router){
   router.get('/api/recipe', function(req, res){
