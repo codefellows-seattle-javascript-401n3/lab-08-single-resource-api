@@ -7,7 +7,7 @@ const router = Router();
 
 //dependency injection (kinda like IIFE)
 require('./route/recipe-route')(router);
-const server = http.createServer(router.routes());
+const server = http.createServer(router.route());
 
 //setup router.method logic. what's going on here? what does router.get take in as parameters? if resolved, what? if rejected, what?
 
