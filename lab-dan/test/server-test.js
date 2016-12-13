@@ -69,7 +69,7 @@ describe('this is a basic test that my server spins up', function() {
       })
   })
 
-  it('should properly update and return an object with a PUT request to \'/dogs\'', function(done) {
+  it('should properly update and return an object for a PUT request to \'/dogs\'', function(done) {
     let testName = 'PUTtest1Name'
     let testBreed = 'PUTtest1Breed'
     chai.request(app)
@@ -86,7 +86,7 @@ describe('this is a basic test that my server spins up', function() {
       })
   })
 
-  it('should properly create a new object if an ID does not exist with a PUT request to \'/dogs\'', function(done) {
+  it('should properly create a new object if an ID does not exist for a PUT request to \'/dogs\'', function(done) {
     let testName = 'PUTtest2Name'
     let testBreed = 'PUTtest2Breed'
     chai.request(app)
@@ -105,7 +105,7 @@ describe('this is a basic test that my server spins up', function() {
   })
 
 
-  it('should properly delete an object and return a 200 status with a DELETE request to \'/dogs\'', function(done) {
+  it('should properly delete an object and return a 200 status for a DELETE request to \'/dogs\'', function(done) {
     chai.request(app)
       .del(`/dogs?id=${testID1}`)
       .end(function(err, res) {
@@ -115,7 +115,7 @@ describe('this is a basic test that my server spins up', function() {
       })
   })
 
-  it('should \'fail\' silently and return a 200 status with a DELETE request to \'/dogs\' for a nonexistent object', function(done) {
+  it('should \'fail\' silently and return a 200 status for a DELETE request to \'/dogs\' for a nonexistent object', function(done) {
     chai.request(app)
       .del(`/dogs?id=${testID1}`)
       .end(function(err, res) {
