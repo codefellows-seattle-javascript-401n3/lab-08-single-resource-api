@@ -2,6 +2,7 @@
 
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
+const mkdirp = require('mkdirp');
 // const storage = {};
 
 module.exports = exports = {};
@@ -10,15 +11,13 @@ exports.createItem = function(schemaName, item){
   // do error handling
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!item) return Promise.reject(new Error('expect item'));
-
-  // if(!storage[schemaName]) storage[schemaName] = {};
-  // storage[schemaName][item.id] = item;
-  // return Promise.resolve(item);
-
   let json = JSON.stringify(item);
-  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
-  .then(() => item)
-  .catch(err => Promise.reject(err));
+
+  mkdirp(`${__dirname}/../data/song`, function(){
+    fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
+    .then(() => item)
+    .catch(err => Promise.reject(err));
+  });
 };
 
 
@@ -35,17 +34,6 @@ exports.fetchItem = function(schemaName, id){
       return Promise.reject(err);
     }
   }).catch(err => Promise.reject(err));
-  // do error handling
-  // return new Promise((resolve, reject) => {
-  //   if (!schemaName) return reject(new Error('expected schemaName'));
-  //   if (!id) return reject(new Error('expected id'));
-  //
-  //   var schema = storage[schemaName];
-  //   if(!schema) return reject(new Error('schema not found'));
-  //   var item = schema[id];
-  //   if(!item) return reject(new Error('item not found'));
-  //   resolve(item);
-  // });
 };
 
 exports.deleteItem = function(schemaName, id){
@@ -55,14 +43,3 @@ exports.deleteItem = function(schemaName, id){
   return fs.unlinkProm(`${__dirname}/../data/${schemaName}/${id}.json`)
   .catch(err => Promise.reject(err));
 };
-  // return new Promise((resolve, reject) =>{
-  //   if(!schemaName) return reject(new Error('schema not found'));
-  //   if(!id) return reject(new Error('id not found'));
-  //
-  //   var schema = storage[schemaName];
-  //   if(!schema) return reject(new Error('schema not found'));
-  //   var item = schema[id];
-  //   if(!item) return reject(new Error('item not found'));
-  //   delete schema[id];
-  //   resolve();
-  // });
