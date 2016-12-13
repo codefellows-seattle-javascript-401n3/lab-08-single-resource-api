@@ -5,7 +5,7 @@ let Promise = require('bluebird');
 let fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
 // let storage = {};
-let storage = './../data/';
+let storage = '/../data/';
 
 exports.createItem = function(schemaName, item) {
   if(!storage[schemaName]) {
@@ -21,7 +21,10 @@ exports.fetchItem = function(schemaName, id) {
   return new Promise((resolve, reject) => {
     if (!schemaName) return reject(new Error('need schemaName'));
     if (!id) return reject(new Error('need id'));
-    
+    return fs.readFileProm(`${__dirname}/../data/${schemaName}/${id}.json`)
+    .then(data => {
+      console.log(data.toString());
+    });
   });
 };
 exports.deleteItem = function(schemaName, id) {
