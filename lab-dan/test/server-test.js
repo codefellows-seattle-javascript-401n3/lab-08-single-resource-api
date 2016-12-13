@@ -8,7 +8,8 @@ chai.use(chaiHttp)
 const app = require('../index.js')
 
 describe('this is a basic test that my server spins up', function() {
-  let testID = ''
+  let testID1 = ''
+  let testID2 = ''
 
   it('should be up and running after the start function is called', function () {
     expect(app.listening).to.be.true
@@ -58,7 +59,7 @@ describe('this is a basic test that my server spins up', function() {
       .send({ name: testName, breed: testBreed})
       .end(function(err, res) {
         let data = JSON.parse(res.text)
-        testID = data.id
+        testID1 = data.id
         expect(err).to.be.null
         expect(res).to.have.status(201)
         expect(res).to.have.header('Content-Type', 'application/json')
@@ -73,7 +74,7 @@ describe('this is a basic test that my server spins up', function() {
     let testBreed = 'PUTtest1Breed'
     chai.request(app)
       .put('/dogs')
-      .send({ id: testID, name: testName, breed: testBreed})
+      .send({ id: testID1, name: testName, breed: testBreed})
       .end(function(err, res) {
         let data = JSON.parse(res.text)
         expect(err).to.be.null
@@ -93,6 +94,7 @@ describe('this is a basic test that my server spins up', function() {
       .send({ id: 'nonexistentid', name: testName, breed: testBreed})
       .end(function(err, res) {
         let data = JSON.parse(res.text)
+        testID2 = data.id
         expect(err).to.be.null
         expect(res).to.have.status(201)
         expect(res).to.have.header('Content-Type', 'application/json')
@@ -105,7 +107,27 @@ describe('this is a basic test that my server spins up', function() {
 
   it('should properly delete an object and return a 200 status with a DELETE request to \'/dogs\'', function(done) {
     chai.request(app)
-      .del(`/dogs?id=${testID}`)
+      .del(`/dogs?id=${testID1}`)
+      .end(function(err, res) {
+        expect(err).to.be.null
+        expect(res).to.have.status(204)
+        done()
+      })
+  })
+
+  it('should \'fail\' silently and return a 200 status with a DELETE request to \'/dogs\' for a nonexistent object', function(done) {
+    chai.request(app)
+      .del(`/dogs?id=${testID1}`)
+      .end(function(err, res) {
+        expect(err).to.be.null
+        expect(res).to.have.status(204)
+        done()
+      })
+  })
+
+  it('clean-up! deleting other object created in test', function(done) {
+    chai.request(app)
+      .del(`/dogs?id=${testID2}`)
       .end(function(err, res) {
         expect(err).to.be.null
         expect(res).to.have.status(204)
