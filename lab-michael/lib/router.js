@@ -39,15 +39,17 @@ Router.prototype.route = function() {
     .then(() => {
       if (typeof this.routes[req.method][req.url.pathname] === 'function') {
         this.routes[req.method][req.url.pathname](req, res);
-        return;
-      }
-      console.log('route not found\n');
-      res.writeHead(404, {
-        'Content-Type': 'text/plain',
+        console.log('');
+        // return;
+      } else {
+        console.log('route not found\n');
+        res.writeHead(404, {
+          'Content-Type': 'text/plain',
 
-      });
-      res.write('Error 404: not found\n');
-      res.end();
+        });
+        res.write('Error 404: not found\n');
+        res.end();
+      }
     })
     .catch( err => {
       console.error(err);

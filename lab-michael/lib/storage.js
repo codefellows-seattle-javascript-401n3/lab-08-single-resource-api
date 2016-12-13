@@ -15,6 +15,16 @@
 
 const storage = {};
 
+exports.fetchAll = function(recipe,item) {
+  var allRecipes = [];
+  if(storage[recipe][item.id] === {});
+  console.log(item.id);
+  allRecipes.push(item.id);
+  return Promise.resolve(item.id);
+
+
+};
+
 exports.createItem = function(recipe, item) {
   if(!recipe) return Promise.reject(new Error('expected reciple'));
   if(!item) return Promise.reject(new Error('exptected item'));
