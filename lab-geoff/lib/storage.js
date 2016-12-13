@@ -1,45 +1,40 @@
 'use strict';
-
-let storage = {};
+let Promise = require('bluebird');
+let fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
 exports.createItem = function(schemaName, item) {
-  if(!storage[schemaName]) {
-    storage[schemaName] = {};
-  }
-  storage[schemaName][item.id] = item;
-  console.log(storage);
-  return Promise.resolve(item);
+  return new Promise((resolve, reject) => {
+    if (!schemaName) return reject(new Error('need schemaName'));
+    if (!item) return reject(new Error('need item'));
+    return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, JSON.stringify(item))
+    .then(() => {
+      console.log(item);
+    })
+    .catch(err => {
+      Promise.reject(err);
+    });
+  });
 };
 exports.fetchItem = function(schemaName, id) {
-  return new Promise((resolve, reject) => {
-    if (!schemaName) {
-      return reject(new Error('need schemaName'));
-    }
-    if (!id) {
-      return reject(new Error('need id'));
-    }
-    let schema = storage[schemaName];
-    if (!schema) {
-      return reject(new Error('no schema found'));
-    }
-    let item = schema[id];
-    if (!item) {
-      return reject(new Error('no item found'));
-    }
-    resolve(item);
+  if (!schemaName) return Promise.reject(new Error('need schemaName'));
+  if (!id) return Promise.reject(new Error('need id'));
+  return fs.readFileProm(`${__dirname}/../data/${schemaName}/${id}.json`)
+  .then(data => {
+    let item = JSON.parse(data.toString());
+    return item;
+  })
+  .catch(err => {
+    Promise.reject(err);
   });
 };
 exports.deleteItem = function(schemaName, id) {
-  return new Promise((resolve, reject) => {
-    if (!schemaName) {
-      return reject(new Error('need schemaName'));
-    }
-    if (!id) {
-      return reject(new Error('need id'));
-    }
-    console.log(storage);
-    delete storage[schemaName][id];
-    console.log(storage);
-    resolve();
+  if (!schemaName) return Promise.reject(new Error('need schemaName'));
+  if (!id) return Promise.reject(new Error('need id'));
+  return fs.unlinkProm(`${__dirname}/../data/${schemaName}/${id}.json`)
+  .then(() => {
+    console.log('file deleted');
+  })
+  .catch(err => {
+    Promise.reject(err);
   });
 };
