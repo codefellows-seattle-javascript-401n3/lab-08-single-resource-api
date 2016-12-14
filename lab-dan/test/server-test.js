@@ -1,3 +1,5 @@
+'use strict'
+
 // const fetch = require('fetch')
 const expect = require('chai').expect
 const chai = require('chai')
