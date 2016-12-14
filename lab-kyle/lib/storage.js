@@ -1,3 +1,5 @@
+'use strict';
+
 let storage = {};
 
 let path = require('path');

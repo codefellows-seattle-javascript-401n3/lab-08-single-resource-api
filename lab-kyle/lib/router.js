@@ -1,3 +1,5 @@
+'use strict';
+
 const parsedUrl = require('../lib/parse-url');
 const parsedBody = require('../lib/parse-body');
 
