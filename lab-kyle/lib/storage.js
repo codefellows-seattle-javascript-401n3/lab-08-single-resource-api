@@ -13,10 +13,10 @@ exports.createItem = function(schemaName, item){
   if (!item.name && !item.color) return Promise.reject(new Error('item is not valid'));
 
   let json = JSON.stringify(item);
-  mkdirp(`${__dirname}/../data/${schemaName}/`, function() {
+  mkdirp(`${__dirname}/../data/${schemaName}`, function() {
     return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
-    .then( () => item)
-    .catch( err => Promise.reject(err));
+      .then( () => item)
+      .catch( err => Promise.reject(err));
   });
 };
   // return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)

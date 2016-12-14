@@ -32,8 +32,8 @@ describe('a restful endpoint', function() {
 
   describe('POST /api/pokemon', function() {
     it('can create a pokemon', function(done) {
-      request.post(`${url}/pokemon/`)
-      .send({'name': 'Bulbasaur', 'color': 'green'})
+      request.post(`${url}/pokemon`)
+      .send({name: 'Bulbasaur', color: 'green'})
       .end(function(err, res) {
         if (err) return done(err);
         expect(res.status).to.equal(200);
@@ -44,7 +44,7 @@ describe('a restful endpoint', function() {
       });
     });
     it('will respond with bad request if no body data provided', function(done) {
-      request.post(`${url}/pokemon/`)
+      request.post(`${url}/pokemon`)
       .end(function(err, res) {
         expect(res.status).to.equal(400);
         expect(res.text).to.equal('bad request');
