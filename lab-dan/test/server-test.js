@@ -13,10 +13,6 @@ describe('this is a basic test that my server spins up', function() {
   let testID1 = ''
   let testID2 = ''
 
-  it('should be up and running after the start function is called', function () {
-    expect(app.listening).to.be.true
-  })
-
   it('should get a 200 response with a correct object for a GET request to \'/\'', function(done) {
     chai.request(app)
       .get('/')
