@@ -2,7 +2,7 @@
 
 let storage = {};
 
-let path = require('path');
+// let path = require('path');
 const mkdirp = require('mkdirp');
 const del = require('del');
 const Promise = require('bluebird');
@@ -41,7 +41,7 @@ exports.fetchItem = function(schemaName, id) {
         let item = JSON.parse(data.toString());
         return item;
       } catch (err){
-        return Promise.reject(error);
+        return Promise.reject(err);
       }
     })
     .catch( err => Promise.reject(err));
