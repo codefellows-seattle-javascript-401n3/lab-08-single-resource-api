@@ -1,8 +1,5 @@
 'use strict';
 
-let storage = {};
-
-// let path = require('path');
 const mkdirp = require('mkdirp');
 const del = require('del');
 const Promise = require('bluebird');
@@ -16,20 +13,26 @@ exports.createItem = function(schemaName, item){
   if (!item.name && !item.color) return Promise.reject(new Error('item is not valid'));
 
   let json = JSON.stringify(item);
-  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
-    .catch( err => {
-      if (err.code === 'ENOENT') {
-        // make the directory
-        mkdirp(`${__dirname}/../data/${schemaName}`, function (err) {
-          if (err) console.error(err);
-          // then write to file
-          fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json);
-        });
-      } else {
-        Promise.reject(err);
-      }
-    });
+  mkdirp(`${__dirname}/../data/${schemaName}/`, function() {
+    return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
+    .then( () => item)
+    .catch( err => Promise.reject(err));
+  });
 };
+  // return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
+  //   .catch( err => {
+  //     if (err.code === 'ENOENT') {
+  //       // make the directory
+  //       mkdirp(`${__dirname}/../data/${schemaName}`, function (err) {
+  //         if (err) console.error(err);
+  //         // then write to file
+  //         return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json);
+  //       });
+  //     } else {
+  //       Promise.reject(err);
+  //     }
+  //   });
+
 
 exports.fetchItem = function(schemaName, id) {
   if (!schemaName) return Promise.reject(new Error('expected schema'));
@@ -48,11 +51,10 @@ exports.fetchItem = function(schemaName, id) {
 };
 
 exports.fetchAll = function(schemaName) {
-  var all = [];
-  for (var key in storage[schemaName]) {
-    all.push(key);
-  }
-  return Promise.resolve(all);
+  return fs.readdirProm(`${__dirname}/../data/${schemaName}`)
+    .then(data => {
+      return data.map(str => str.replace('.json', ''));
+    });
 };
 
 exports.deleteItem = function(schemaName, id) {
