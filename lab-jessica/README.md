@@ -26,7 +26,7 @@ In this project you are able to use HTTP methods to perform CRUD operations on m
 
    `curl -X DELETE localhost:3000/api/books?id=1d5bf500-4c37-4185-8533-53dbbe200596`
 
-## Errors Codes
+## Error Codes
 
 ### `/api/books`
 
