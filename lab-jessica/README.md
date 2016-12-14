@@ -1,6 +1,6 @@
 # Jessica's RESTful Book API!
 
-In this project you are able to use HTTP methods to perform CRUD operations on my simple resource, books. Well, you are only able to POST books, GET books and DELETE books from the filesystem. A PUT option will become available in future updates.
+In this project you are able to use HTTP methods to perform CRUD operations on my simple resource, books. Well, you are only able to POST books, GET books and DELETE books from a storage object. A PUT option will become available in future updates.
 
 ## Server Endpoints
 
@@ -15,7 +15,7 @@ In this project you are able to use HTTP methods to perform CRUD operations on m
 
 * `GET` request
   * Pass an `?id=<uuid>` in the query string to retrieve a specific book as json
-  * If no id is provided, an array of id's for all books will be returned
+  * If no id is provided, an array of id's for all books in storage will be returned
   * Example curl request:
 
   `curl localhost:3000/api/books?id=1d5bf500-4c37-4185-8533-53dbbe200596`
@@ -27,7 +27,7 @@ In this project you are able to use HTTP methods to perform CRUD operations on m
 
    `curl -X DELETE localhost:3000/api/books?id=1d5bf500-4c37-4185-8533-53dbbe200596`
 
-## Errors Codes
+## Error Codes
 
 ### `/api/books`
 
