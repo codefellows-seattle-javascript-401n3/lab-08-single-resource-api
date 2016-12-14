@@ -1,3 +1,5 @@
+'use strict';
+
 let storage = {};
 
 const Promise = require('bluebird');

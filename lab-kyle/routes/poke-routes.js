@@ -1,3 +1,5 @@
+'use strict';
+
 const storage = require('../lib/storage');
 const response = require('../lib/response');
 const Pokemon = require('../model/resource');

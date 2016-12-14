@@ -1,3 +1,5 @@
+'use strict';
+
 const parsedUrl = require('url').parse;
 const parsedQuery = require('querystring').parse;
 
