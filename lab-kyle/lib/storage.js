@@ -59,12 +59,7 @@ exports.deleteItem = function(schemaName, id) {
   if (!schemaName) return Promise.reject(new Error('expected schema'));
   if (!id) return Promise.reject(new Error('expected id'));
 
-  // if (!storage[schemaName]) return Promise.reject(new Error('schema does not exist'));
-  // delete storage[schemaName][id];
-
-  // return Promise.resolve();
-  // del.sync(['public/assets/**', '!public/assets', '!public/assets/goat.png']);
-  return del([`${__dirname}/../data/${schemaName}/${id}.json`], {dryRun: true})
+  return del([`${__dirname}/../data/${schemaName}/${id}.json`])
             .then(paths => {
               console.log('Files and folders that would be deleted:\n', paths.join('\n'));
             });
