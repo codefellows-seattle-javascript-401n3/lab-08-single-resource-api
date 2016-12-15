@@ -11,7 +11,7 @@ module.exports = function(req) {
       });
       req.on('end', () => {
         try {
-          console.log(req.body);
+          // console.log(req.body);
           req.body = JSON.parse(req.body);
           resolve(req);
 

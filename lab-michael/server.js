@@ -11,7 +11,7 @@ const Router = require('./lib/router.js');
 const PORT = process.env.PORT || 3000;
 const router = new Router();
 
-require('./model/recipe.js')(router);
+require('./routes/recipe-routes.js')(router);
 
 const server = http.createServer(router.route());
 //   res.writeHead(200, {

@@ -1,10 +1,10 @@
 'use strict';
 
-const storage = require('../lib/storage');
+const storage = require('../lib/storage.js');
 const response = require('../lib/response.js');
 const Recipe = require('../model/recipe.js');
 
-module.exports - function(router) {
+module.exports = function(router) {
   router.get('/api/recipe', function(req, res){
     if(req.url.query.id){
       storage.fetchItem('recipe', req.url.query.id)
@@ -24,24 +24,46 @@ module.exports - function(router) {
         res.end();
       });
       return;
-    }
-    res.writeHead(400, {
-      'Content-Type': 'text/plain',
-    });
-    res.write('bad request');
-    res.end();
+    } else {
+      if(!req.url.query.id){
+        storage.fetchAll('recipe', req.url.query.id)
+        .then(recipe => {
+          res.writeHead(200, {
+            'Content-Type': 'application/json',
+          });
+          res.write(JSON.stringify(recipe));
+          res.end();
+        })
+        .catch(err => {
+          console.error(err);
+          res.writeHead(404, {
+            'Content-Type': 'text/plain',
+          });
+          res.write('not found\n');
+          res.end();
+        });
+        return;
+      }
+      res.writeHead(400, {
+        'Content-Type': 'text/plain',
+      });
+      res.write('bad request');
+      res.end();
     // storage.fetchItem()
+    }
   });
+
 
   //should create a recipe on the storage
   router.post('/api/recipe', function(req, res){
-    console.log(req.body);
+    // console.log(req.body);
     try {
       var recipe = new Recipe(req.body.name, req.body.content, req.body.mealType);
       storage.createItem('recipe', recipe);
       res.writeHead(200, {
         'Content-Type': 'application/json',
       });
+      console.log(recipe);
       res.write(JSON.stringify(recipe));
       res.end();
     } catch(err) {
@@ -75,4 +97,4 @@ module.exports - function(router) {
     res.write('bad request');
     res.end();
   });
-
+};
