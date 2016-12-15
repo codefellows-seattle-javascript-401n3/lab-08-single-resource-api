@@ -1,27 +1,60 @@
 'use strict';
 
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
+// const del = require('del');
 const storage = {};
+const pool = [];
 
-exports.createItem = function(schemaName, item){
-  if (!schemaName) return Promise.reject(new Error('expected schemaName'));
-  if (!item) return Promise.reject(new Error('expected item'));
-
-  if(!storage[schemaName]) storage[schemaName] = {};
-  storage[schemaName][item.id] = item;
-  return Promise.resolve(item);
+exports.fetchAll = function(note) {
+  if (!note) return Promise.reject(new Error('expected note'));
+  // if (!content) return Promise.reject(new Error('expected content'));
+  // console.log(note);
+  return fs.readdirProm(`${__dirname}/../data/note`)
+  .then(data => data.map( str => str.replace('.json', '')))
+  .catch(err => Promise.reject(err));
 };
 
-exports.fetchItem = function(schemaName, id){
-  console.log('fetching 0')
-  return new Promise((resolve, reject) => {
-    console.log('fetching 1')
-    if (!schemaName) return reject(new Error('expected schemaName'));
-    if (!id) return reject(new Error('expected id'));
+exports.createItem = function(note, content) {
+  if (!note) return Promise.reject(new Error('expected note'));
+  if (!content) return Promise.reject(new Error('expected content'));
 
-    var schema = storage[schemaName];
-    if(!schema) return reject(new Error('schema not found'));
-    var item = schema[id];
-    if(!item) return reject(new Error('item not found'));
-    resolve(item);
+  let json = JSON.stringify(content);
+  pool.push(content);
+  return fs.writeFileProm(`${__dirname}/../data/note/${content.id}.json`, json)
+  .then(() => content)
+  .catch( err => Promise.reject(err));
+};
+
+exports.fetchItem = function(note, id) {
+  if(!note) return Promise.reject(new Error('expected note'));
+  if(!id) return Promise.reject(new Error('expected id'));
+
+  return fs.readFileProm(`${__dirname}/../data/note/${id}.json`)
+  .then(data => {
+    try{
+      let content = JSON.parse(data.toString());
+      return content;
+    } catch (err){
+      return Promise.reject(err);
+    }
+  })
+  .catch(err => Promise.reject(err));
+};
+
+exports.deleteItem = function(note, id) {
+  return new Promise((resolve, reject) => {
+
+    if(!note) return reject(new Error('expected note'));
+    if(!id) return reject(new Error('expected id'));
+
+    return fs.unlinkProm(`${__dirname}/../data/note/${id}.json`)
+    .then( () => id)
+    .catch( (err) => reject(err));
   });
 };
+
+
+// object.keys(note).forEach(function(key) {
+//   console.log(note[key]);
+// });

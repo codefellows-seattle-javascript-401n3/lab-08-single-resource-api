@@ -13,3 +13,6 @@ const server = http.createServer(router.route());
 server.listen(PORT, function(){
   console.log('server is running', PORT);
 });
+
+// const data = require('./data/3ff0bf30-c177-11e6-a650-53a1b8ac465e');
+// console.log(data);

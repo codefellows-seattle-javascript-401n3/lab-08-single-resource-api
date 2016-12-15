@@ -11,8 +11,6 @@ const Router = module.exports = function() {
     DELETE: {},
   };
 };
-
-
 Router.prototype.get = function(endpoint, callback) {
   this.routes.GET[endpoint] = callback;
 };
@@ -33,20 +31,21 @@ Router.prototype.route = function() {
       parseJSON(req),
     ])
     .then(() => {
-      if(this.routes[req.method][req.url.pathname]) {
+      if(typeof this.routes[req.method][req.url.pathname] === 'function') {
+        console.log('router triggered');
         this.routes[req.method][req.url.pathname](req, res);
         return;
       }
-
-      console.error('route not found');
+      console.log(this.routes);
+      console.error('route not found line40');
       res.writeHead(404, {'Content-Type': 'text/plain'});
-      res.write('not found');
+      res.write('not found line 42');
       res.end();
     })
     .catch(err => {
       console.error(err);
       res.writeHead(400, {'Content-Type': 'text/plain'});
-      res.write('bad request.');
+      res.write('bad request line 47');
       res.end();
     });
   };

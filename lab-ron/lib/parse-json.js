@@ -2,7 +2,7 @@
 
 module.exports = function(req) {
   return new Promise((resolve, reject) => {
-    if(req.method === 'POST' || req.method === 'PUT') {
+    if(req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
       console.log('parsing body');
       let body = '';
       req.on('data', data => {
@@ -19,7 +19,7 @@ module.exports = function(req) {
         }
       });
 
-      req.on('error', () => {
+      req.on('error', (err) => {
         console.error(err);
         reject(err);
       });

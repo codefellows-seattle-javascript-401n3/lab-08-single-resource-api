@@ -18,7 +18,10 @@
   "homepage": "https://github.com/Rubiksron/lab-08-single-resource-api#readme",
   "dependencies": {
     "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "delete": "^0.3.2",
     "mocha": "^3.2.0",
-    "node-uuid": "^1.4.7"
+    "node-uuid": "^1.4.7",
+    "superagent": "^3.2.1"
   }
 }
