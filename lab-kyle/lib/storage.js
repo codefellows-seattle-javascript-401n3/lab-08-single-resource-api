@@ -1,6 +1,6 @@
 'use strict';
 
-const mkdirp = require('mkdirp');
+// const mkdirp = require('mkdirp');
 const del = require('del');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
@@ -13,25 +13,12 @@ exports.createItem = function(schemaName, item){
   if (!item.name && !item.color) return Promise.reject(new Error('item is not valid'));
 
   let json = JSON.stringify(item);
-  mkdirp(`${__dirname}/../data/${schemaName}`, function() {
-    return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
-      .then( () => item)
-      .catch( err => Promise.reject(err));
-  });
+  // return mkdirp(`${__dirname}/../data/${schemaName}/`, function() {
+  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
+    .then( () => item)
+    .catch( err => Promise.reject(err));
+  // });
 };
-  // return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
-  //   .catch( err => {
-  //     if (err.code === 'ENOENT') {
-  //       // make the directory
-  //       mkdirp(`${__dirname}/../data/${schemaName}`, function (err) {
-  //         if (err) console.error(err);
-  //         // then write to file
-  //         return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json);
-  //       });
-  //     } else {
-  //       Promise.reject(err);
-  //     }
-  //   });
 
 
 exports.fetchItem = function(schemaName, id) {
