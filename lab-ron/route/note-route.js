@@ -12,14 +12,12 @@ module.exports = function(router){
     if (req.url.query.id) {
       storage.fetchItem('note', req.url.query.id)
       .then(note => {
-        // response.sendJSON(res, 200, note);
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.write(JSON.stringify(note));
         res.end();
       })
       .catch( err => {
         console.error(err);
-        // response.sendText(res, 404, 'not found');
         res.writeHead(404, {'Content-Type':'text/plain'});
         res.write('note found line 24\n');
         res.end();
@@ -44,7 +42,6 @@ module.exports = function(router){
       res.write('bad request line 44');
       res.end();
     }
-    // response.sendText(res, 400, 'bad request fetchAll');
   });
 
   router.post('/api/note', function(req,res) {

@@ -2,14 +2,11 @@
 
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
-// const del = require('del');
 const storage = {};
 const pool = [];
 
 exports.fetchAll = function(note) {
   if (!note) return Promise.reject(new Error('expected note'));
-  // if (!content) return Promise.reject(new Error('expected content'));
-  // console.log(note);
   return fs.readdirProm(`${__dirname}/../data/note`)
   .then(data => data.map( str => str.replace('.json', '')))
   .catch(err => Promise.reject(err));
@@ -53,8 +50,3 @@ exports.deleteItem = function(note, id) {
     .catch( (err) => reject(err));
   });
 };
-
-
-// object.keys(note).forEach(function(key) {
-//   console.log(note[key]);
-// });
