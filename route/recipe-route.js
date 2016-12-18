@@ -20,9 +20,9 @@ module.exports = function(router){
     response.sendText(res, 400, 'bad request');
   });
 
-  router.post('api/recipe', function(req, res) {
+  router.post('api/recipe/', function(req, res) {
     try {
-      var recipe = new Recipe(req.body.name, req.body.ingredients);
+      var Recipe = new Recipe(req.body.name, req.body.ingredients);
       storage.createItem('recipe', recipe);
       res.writeHead(200, {
         'Content-Type': 'application/json',
