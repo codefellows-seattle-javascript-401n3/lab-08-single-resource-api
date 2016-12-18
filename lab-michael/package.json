@@ -1,0 +1,35 @@
+{
+  "name": "lab-08-single-resource-api",
+  "version": "1.0.0",
+  "description": "pulling a resource from api",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silvershotm1/lab-08-single-resource-api.git"
+  },
+  "author": "Michael Bishop",
+  "license": "MIT",
+  "devDependencies": {
+    "bluebird": "^3.4.6",
+    "chai": "^3.5.0",
+    "eslint": "^3.11.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "mkdir-bluebird": "^1.0.14",
+    "mocha": "^3.2.0",
+    "superagent": "^3.3.0"
+  },
+  "dependencies": {
+    "mkdir": "0.0.2",
+    "mkdir-bluebird": "^1.0.14",
+    "node-uuid": "^1.4.7"
+  }
+}
