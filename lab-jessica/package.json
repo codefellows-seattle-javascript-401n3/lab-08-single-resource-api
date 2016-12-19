@@ -1,0 +1,31 @@
+{
+  "name": "lab-08-single-resource-api ",
+  "version": "1.0.0",
+  "description": "Lab 08 - Single Resource API",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessicamvs/lab-08-single-resource-api.git"
+  },
+  "author": "Jessica Vasquez-Soltero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jessicamvs/lab-08-single-resource-api/issues"
+  },
+  "homepage": "https://github.com/jessicamvs/lab-08-single-resource-api#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.2.0",
+    "superagent": "^3.1.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "node-uuid": "^1.4.7"
+  }
+}
