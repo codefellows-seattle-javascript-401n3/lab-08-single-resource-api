@@ -1,16 +1,14 @@
 #:dog: Dan's Dog(e) API :dog:
 
-This is a basic API with non-persistent data.
+This is a basic API with _persistent_ data.
 
-Objects are stored in the storage object and the stored objects have the following properties:
+Objects are stored as JSON objects in the data folder and the stored objects have the following properties:
 ```
-storage.data = {
-  '1234-test-obj': {
-    id: '1234-test-obj',
-    creationDate: Date(12/11/2016),
-    name: 'Test',
-    breed: 'Shiba',
-  },
+{
+  "id": "1234-test-obj",
+  "creationDate": "2016-12-11T06:06:33.156Z",
+  "name": "Test",
+  "breed": "Shiba"
 }
 ```
 
