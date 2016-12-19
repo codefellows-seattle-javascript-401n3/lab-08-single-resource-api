@@ -3,7 +3,7 @@ const request = require('superagent');
 const expect = require('chai').expect;
 
 require('../server.js');
-var user = null; //I only user this for the non-persistence test
+// var user = null; //I only user this for the non-persistence test
 
 describe('testing user routes', function() {
   describe('testing POST /api/users', function() {
@@ -14,7 +14,7 @@ describe('testing user routes', function() {
         if (err) return done (err);
         expect(res.status).to.equal(200);
         expect(res.body.username).to.equal('Nedrick'); // tried another name and it failed (as it should)
-        user = res.body; //once again, only non-persistence.
+        // user = res.body; //once again, only non-persistence.
         done();
       });
     });
@@ -39,8 +39,8 @@ describe('testing user routes', function() {
   });
   describe('testing GET /api/users', function() {
     it('should retrieve user information based on a querystring', function(done) {
-      // request.get('http://localhost:3000/api/users?id=user_02987197-6e7a-4abc-9bc6-0a4270b6cb30') //this is for persistence
-      request.get(`http://localhost:3000/api/users?id=${user.id}`) //this is for my non-persistence test. and it passes!
+      request.get('http://localhost:3000/api/users?id=user_02987197-6e7a-4abc-9bc6-0a4270b6cb30') //this is for persistence
+      // request.get(`http://localhost:3000/api/users?id=${user.id}`) //this is for my non-persistence test. and it passes!
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(200);
