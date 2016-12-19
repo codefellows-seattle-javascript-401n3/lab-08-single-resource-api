@@ -1,0 +1,28 @@
+{
+  "name": "single-resource-api",
+  "version": "1.0.0",
+  "description": "This is a HTTP server that handles POST, GET, and DELETE requests for a single resource and returns JSON",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "author": "Dan Peters",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-plumber": "^1.1.0",
+    "mocha": "^3.1.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "node-uuid": "^1.4.7"
+  }
+}
