@@ -14,3 +14,5 @@ const server = http.createServer(router.route());
 server.listen(PORT, () => {
   console.log('serving port 3000');
 });
+
+module.exports = server;

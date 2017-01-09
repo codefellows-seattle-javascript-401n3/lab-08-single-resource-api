@@ -31,3 +31,9 @@ exports.fetchItem = function(recipeSchema, id) {
   })
   .catch((err) => Promise.reject(err));
 };
+
+exports.deleteItem = function(recipeSchema, id) {
+  if(!recipeSchema) return Promise.reject(new Error('expected Schema'));
+  if(!id) return Promise.reject(new Error('expected an id'));
+  return fs.unlinkProm(`${__dirname}/../data/${recipeSchema}/${id}.json`);
+};
