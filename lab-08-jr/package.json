@@ -1,0 +1,33 @@
+{
+  "name": "lab-08-jr",
+  "version": "1.0.0",
+  "description": "lab-08-basic-api",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jurrish/lab-08-single-resource-api.git"
+  },
+  "author": "JR",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jurrish/lab-08-single-resource-api/issues"
+  },
+  "homepage": "https://github.com/jurrish/lab-08-single-resource-api#readme",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "node-uuid": "^1.4.7"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "superagent": "^3.3.1"
+  }
+}

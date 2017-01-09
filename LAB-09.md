@@ -21,7 +21,11 @@ Here are some npm modules that you may find useful for this project, it is not r
  * model
  * route
  * data // to hold your resources
+<<<<<<< HEAD
+* refactor the **storage** module to have file system persistence
+=======
 * refactor the **storage** module to have file system persistence 
+>>>>>>> a20707d35a1d520df662a631f5c5f0a50ab563c5
 
 ## Bonus
 * **2pts** - have the **storage** module check for the type sub-directory, and create it if it does not exist
