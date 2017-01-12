@@ -1,3 +1,4 @@
+
 # Lab-09 Single Resource API with Persistence
 
 ## Description
@@ -20,6 +21,7 @@ When making a GET request to '/api/pokemon', you may include a querystring with 
 
   -example  'http://localhost:3000/api/pokemon/data/<schema>/<id>'
 
+
   This will return that specific Pokemon
 
 
@@ -32,9 +34,11 @@ both a **name** and **color** property.
 
   This will create a new file with that schemas information
 
+
 ### DELETE request
 
 When making a DELETE request you must include the ID number and the Schema for the
 item you wish to delete.
+
 
   -example 'http://localhost:3000/api/pokemon/<Schema>/<id>'

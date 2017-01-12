@@ -3,7 +3,7 @@
 // const mkdirp = require('mkdirp');
 const del = require('del');
 const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
+// const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
 module.exports = exports = {};
 
