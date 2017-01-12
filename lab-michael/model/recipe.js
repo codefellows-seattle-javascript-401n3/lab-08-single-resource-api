@@ -11,3 +11,13 @@ module.exports = function(name, content, mealType) {
   this.content = content;
   this.mealType = mealType;
 };
+
+// Recipe.create = (_recipe) => {
+//   try {
+//     let recipe = new Recipe(_recipe);
+//     return storage.createItem(recipe);
+//   }
+//   catch(err) {
+//     return Promise.reject;
+//   }
+// };

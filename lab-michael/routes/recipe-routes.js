@@ -24,33 +24,24 @@ module.exports = function(router) {
         res.end();
       });
       return;
-    } else {
-      if(!req.url.query.id){
-        storage.fetchAll('recipe', req.url.query.id)
-        .then(recipe => {
-          res.writeHead(200, {
-            'Content-Type': 'application/json',
-          });
-          res.write(JSON.stringify(recipe));
-          res.end();
-        })
-        .catch(err => {
-          console.error(err);
-          res.writeHead(404, {
-            'Content-Type': 'text/plain',
-          });
-          res.write('not found\n');
-          res.end();
-        });
-        return;
-      }
-      res.writeHead(400, {
+    }
+    storage.fetchAll('recipe')
+    .then (_recipe => {
+      res.writeHead(200, {
+        'Content-Type': 'application/json',
+      });
+      res.write(JSON.stringify(_recipe));
+      res.end();
+    })
+    .catch(err => {
+      console.error(err);
+      res.writeHead(404, {
         'Content-Type': 'text/plain',
       });
-      res.write('bad request');
+      res.write('not found\n');
       res.end();
-    // storage.fetchItem()
-    }
+    });
+    return;
   });
 
 
