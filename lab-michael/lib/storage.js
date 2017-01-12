@@ -37,8 +37,7 @@ exports.fetchItem = function(recipe, id) {
     } catch (err) {
       return Promise.reject(err);
     }
-  })
-  .catch(err => Promise.reject(err));
+  });
 };
 
 exports.deleteItem = function(recipe, id) {
