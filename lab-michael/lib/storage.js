@@ -4,6 +4,8 @@ const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
 const storage = {};
 
+module.exports = exports = {};
+
 exports.fetchAll = function(recipe) {
   return fs.readdirProm(`${__dirname}/../data/${recipe}/`)
   .then(data => {
@@ -13,7 +15,7 @@ exports.fetchAll = function(recipe) {
 };
 
 exports.createItem = function(recipe, item) {
-  if(!recipe) return Promise.reject(new Error('expected reciple'));
+  if(!recipe) return Promise.reject(new Error('expected recipe'));
   if(!item) return Promise.reject(new Error('exptected item'));
   // if (!storage[recipe]) storage[recipe] = {};
   // storage[recipe][item.id] = item;
