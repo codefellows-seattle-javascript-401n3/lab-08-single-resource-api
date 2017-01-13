@@ -1,7 +1,7 @@
 'use strict';
 
 const storage = require('../lib/storage.js');
-const response = require('../lib/response.js');
+// const response = require('../lib/response.js');
 const Recipe = require('../model/recipe.js');
 
 module.exports = function(router) {
@@ -70,9 +70,12 @@ module.exports = function(router) {
   //should delete an already existing recipe
   router.delete('/api/recipe', function(req, res){
     if(req.url.query.id){
+      console.log('Hit Delete Route');
       storage.deleteItem('recipe', req.url.query.id)
-      .then(() => {
-        res.writeHead(204);
+      .then( () => {
+        res.writeHead(204, {
+          'Content-Type': 'text/plain'
+        });
         res.end();
       })
       .catch(err => {

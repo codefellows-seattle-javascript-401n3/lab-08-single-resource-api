@@ -2,7 +2,7 @@
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
-const storage = {};
+// const storage = {};
 
 module.exports = exports = {};
 
@@ -46,11 +46,13 @@ exports.deleteItem = function(recipe, id) {
   return new Promise((resolve,reject) => {
     if (!recipe) return reject (new Error('expected recipe'));
     if (!id) return reject (new Error('expected id'));
+    // console.log(recipe.id);
+    // console.log(recipe);
+    resolve(recipe);
+    return fs.unlinkProm(`${__dirname}/../data/${recipe}/${id}.json`)
+    .catch( err => Promise.reject(err));
 
-    recipe = storage[recipe];
-    if(!recipe) return reject(new Error('recipe not found'));
-    delete recipe[id];
+    // delete recipe[id];
 
-    resolve();
   });
 };
