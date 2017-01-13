@@ -12,13 +12,3 @@ const Recipe = function(name, content, mealType) {
   this.mealType = mealType;
 };
 module.exports = Recipe;
-
-// Recipe.create = (_recipe) => {
-//   try {
-//     let recipe = new Recipe(_recipe);
-//     return storage.createItem(recipe);
-//   }
-//   catch(err) {
-//     return Promise.reject;
-//   }
-// };
