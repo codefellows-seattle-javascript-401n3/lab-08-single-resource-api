@@ -2,7 +2,9 @@
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
-const storage = {};
+// const storage = {};
+
+module.exports = exports = {};
 
 exports.fetchAll = function(recipe) {
   return fs.readdirProm(`${__dirname}/../data/${recipe}/`)
@@ -13,7 +15,7 @@ exports.fetchAll = function(recipe) {
 };
 
 exports.createItem = function(recipe, item) {
-  if(!recipe) return Promise.reject(new Error('expected reciple'));
+  if(!recipe) return Promise.reject(new Error('expected recipe'));
   if(!item) return Promise.reject(new Error('exptected item'));
   // if (!storage[recipe]) storage[recipe] = {};
   // storage[recipe][item.id] = item;
@@ -37,19 +39,20 @@ exports.fetchItem = function(recipe, id) {
     } catch (err) {
       return Promise.reject(err);
     }
-  })
-  .catch(err => Promise.reject(err));
+  });
 };
 
 exports.deleteItem = function(recipe, id) {
   return new Promise((resolve,reject) => {
     if (!recipe) return reject (new Error('expected recipe'));
     if (!id) return reject (new Error('expected id'));
+    // console.log(recipe.id);
+    // console.log(recipe);
+    resolve(recipe);
+    return fs.unlinkProm(`${__dirname}/../data/${recipe}/${id}.json`)
+    .catch( err => Promise.reject(err));
 
-    recipe = storage[recipe];
-    if(!recipe) return reject(new Error('recipe not found'));
-    delete recipe[id];
+    // delete recipe[id];
 
-    resolve();
   });
 };

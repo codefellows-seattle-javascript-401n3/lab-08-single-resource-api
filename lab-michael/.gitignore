@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io/api/linux,osx
 
+data/
+
 ### NODE ###
 node_modules/
 
