@@ -33,12 +33,13 @@ describe('a restful endpoint', function() {
   describe('POST /api/pokemon', function() {
     it('can create a pokemon', function(done) {
       request.post(`${url}/pokemon`)
-      .send({'name': 'Pikachu', 'color': 'yellow'})
+      .set('content-type', 'application/json')
+      .send('{"name": "Bulbasaur", "color": "green"}')
       .end(function(err, res) {
         if (err) return done(err);
         expect(res.status).to.equal(200);
-        expect(res.body.name).to.equal('Pikachu');
-        expect(res.body.color).to.equal('yellow');
+        expect(res.body.name).to.equal('Bulbasaur');
+        expect(res.body.color).to.equal('green');
         pokemon = res.body;
         done();
       });
@@ -68,8 +69,8 @@ describe('a restful endpoint', function() {
       .end(function(err, res) {
         if (err) return done(err);
         expect(res.status).to.equal(200);
-        expect(res.body.name).to.equal('Pikachu');
-        expect(res.body.color).to.equal('yellow');
+        expect(res.body.name).to.equal('Bulbasaur');
+        expect(res.body.color).to.equal('green');
         done();
       });
     });
@@ -82,10 +83,10 @@ describe('a restful endpoint', function() {
       });
     });
     it('will respond with a list of ids if no id is provided', function(done) {
-      request.get(`${url}/pokemon?id`)
+      request.get(`${url}/pokemon`)
       .end(function(err, res) {
         expect(res.status).to.equal(200);
-        expect(res.body).to.eql([`${pokemon.id}`]);
+        expect(typeof res.body).to.equal('object');
         done();
       });
     });
